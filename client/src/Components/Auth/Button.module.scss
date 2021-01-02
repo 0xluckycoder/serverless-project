@@ -1,0 +1,54 @@
+@import 'vars';
+.formFooterButtons {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 50px;
+    margin-top: 3rem;
+    gap: 1rem;
+
+    button {
+        border: none;
+        background: $primary-color;
+        color: #fff;
+        padding: 10px 50px;
+        border-radius: 20px;
+
+        &:focus {
+            outline: none;
+        }
+
+        &:hover {
+            background: $hover-color;
+            transition: 200ms;
+        }
+    }
+}
+
+@media(max-width: 500px) {
+    .formFooterButtons {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 50px;
+        margin-top: 3rem;
+        gap: 1rem;
+    
+        button {
+            border: none;
+            background: $primary-color;
+            color: #fff;
+            padding: 10px 50px;
+            border-radius: 20px;
+    
+            &:focus {
+                outline: none;
+            }
+    
+            &:hover {
+                background: $hover-color;
+                transition: 200ms;
+            }
+        }
+    }
+}

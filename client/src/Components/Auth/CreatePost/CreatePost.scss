@@ -1,0 +1,57 @@
+.form-wrapper {
+
+    .form-left {
+        position: fixed;
+        background: #1b1b1f;;
+        height: 100vh;
+        color: #fff;
+        width: 300px;
+        padding: 1rem 0 0 3rem;
+
+        img {
+            width: 100px;
+        }
+
+        .step-wrapper {
+            margin-top: 4rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+
+
+            .step {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                cursor: pointer;
+
+                h1 {
+                    font-size: 1.3rem;
+                    font-weight: 400;
+                }
+            }
+        }
+    }
+
+    .form-right {
+        margin-left: 300px;
+
+        h1 {
+            font-size: 1.5rem;
+        }
+    }
+}
+
+@media(max-width: 900px) {
+
+    .form-wrapper {
+        .form-left {
+            display: none;
+        }
+
+        .form-right {
+            margin-left: 0px;
+        }
+    }
+
+}

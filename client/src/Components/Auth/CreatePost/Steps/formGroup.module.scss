@@ -1,0 +1,52 @@
+.groupWrapper {
+    .formGroup {
+        margin-top: 1rem;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
+}
+
+.branchGroupWrapper {
+    %buttons {
+        border: none;
+        background: #1b1b1f;
+        color: #fff;
+        height: 40px;
+        width: 50px;
+        border-radius: 10px;
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    .branchInput {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+
+        .addButton {
+            display: flex;
+            align-items: flex-end;
+            justify-content: flex-start;
+
+            button {
+                @extend %buttons;
+            }
+        }
+    }
+
+    button {
+        margin-top: 1em;
+        @extend %buttons;
+    }
+}
+
+@media(max-width: 500px) {
+    .groupWrapper {
+        .formGroup {
+            grid-template-columns: 1fr;
+        }
+    }
+}

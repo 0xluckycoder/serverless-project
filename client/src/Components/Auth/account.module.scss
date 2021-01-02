@@ -1,0 +1,198 @@
+$primary-font: #fff;
+$dark-bg: #1b1b1f;
+$greyed-font: #878788;
+
+.wrapper {
+    // background-color: #F4F4F4;
+    height: 100%;
+    text-align: center;
+
+    %shared-card {
+        display: flex;
+        color: $primary-font;
+        height: 42px;
+        border-radius: 20px;
+        align-items: center;
+        cursor: pointer;
+        padding: 10px;
+    }
+
+    .header {
+        padding: 1rem 0 3rem 0;
+
+        p {
+            color: $greyed-font;
+            margin-bottom: 0px;
+        }
+
+        .email {
+            @extend %shared-card;
+            width: 235px;
+            margin: 0.5rem auto;
+            justify-content: space-evenly;
+            background: #555555;
+
+            p {
+                color: $primary-font;
+            }
+        }
+
+        .createButton {
+            @extend %shared-card;
+            margin: 0 auto;
+            justify-content: center;
+            width: 120px;
+            border: $primary-font;
+            background-color: $dark-bg;
+
+            &:hover {
+                text-decoration: none;
+            }
+        }
+    }
+
+    .body {
+        &:not(:first-child) {
+            margin-top: 10px;
+        }
+        .accordion {
+
+            .card {
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+                background: $primary-font;
+                width: 320px;
+                height: 70px;
+                border-radius: 8px;
+                margin: 0 auto;
+                box-shadow: 0px 1px 6px -2px rgba(0, 0, 0, 0.25);
+                cursor: pointer;
+
+                img {
+                    width: 50px;
+                    border-radius: 8px;
+                }
+
+                p {
+                    margin: 0px;
+                }
+            }
+        }
+
+        .collapse {
+            width: 320px;
+            background: $primary-font;
+            box-shadow: 0px 1px 6px -2px rgba(0, 0, 0, 0.25);
+            border-radius: 8px;
+            margin: 1rem auto 0 auto;
+
+
+            p {
+                margin: 0px;
+            }
+
+            .collapseWrapper {
+                padding: 1rem;
+
+                %shared-button {
+                    border: none;
+                    border-radius: 20px;
+                    color: $primary-font;
+                    height: 35px;
+                    width: 90px;
+                    outline: none;
+                }
+
+                .views {
+                    text-align: center;
+                    background: $dark-bg;
+                    text-align: center;
+                    color: $primary-font;
+                    padding: 10px;
+                    border-radius: 8px;
+
+                    .viewsAmount {
+                        font-size: 2rem;
+                        color: $primary-font;
+                    }
+
+                    p {
+                        color: $greyed-font;
+                    }
+                }
+
+                .offers {
+                    margin-top: 1rem;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+
+                    p {
+                        color: $greyed-font;
+                    }
+
+                    button {
+                        @extend %shared-button;
+                        justify-content: space-evenly;
+                    }
+
+                    .enabled {
+                        background: #00E075;
+                    }
+
+                    .disabled {
+                        background: rgb(88, 88, 88);
+                    }
+                }
+
+                .buttons {
+                    margin-top: 1rem;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+
+                    button {
+
+                        &:hover {
+                            background: #2f2f36;
+                            transition: 200ms;
+                        }
+
+                        @extend %shared-button;
+                        background: $dark-bg;
+                    }
+                }
+
+            }
+        }
+    }
+
+    .changePassword {
+        @extend %shared-card;
+        justify-content: space-evenly;
+        margin: 3rem auto 0 auto;
+        color: $primary-font;
+        width: 150px;
+        background-color: $dark-bg;
+        a {
+            color: white;
+            &:hover {
+                text-decoration: none;
+            }
+        }
+    }
+
+    .logout {
+        @extend %shared-card;
+        justify-content: space-evenly;
+        margin: 0.5rem auto 1rem auto;
+        color: $primary-font;
+        width: 100px;
+        background-color: $dark-bg;
+
+        p {
+            margin: 0;
+        }
+    }
+}

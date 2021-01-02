@@ -1,0 +1,292 @@
+import React, { useContext, useEffect, useState } from 'react';
+import {
+  Button,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  UncontrolledTooltip,
+  Dropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+} from 'reactstrap';
+
+// swiper
+import Swiper from 'swiper';
+import 'swiper/css/swiper.min.css';
+
+// css
+import './BodyModal.scss';
+
+// button icons
+import { ReactComponent as Share } from '../../assets/share.svg';
+import { ReactComponent as Call } from '../../assets/phone-btn.svg';
+import { ReactComponent as Globe } from '../../assets/globe-btn.svg';
+import { ReactComponent as Direction } from '../../assets/marker-2.svg';
+
+import Facebook from '../../assets/deleteme/facebook.png';
+import Instagram from '../../assets/deleteme/instagram.png';
+import Twitter from '../../assets/deleteme/twitter.png';
+import Pickme from '../../assets/deleteme/pickme.png';
+import Uber from '../../assets/deleteme/uber.png';
+import WeDeliver from '../../assets/deleteme/deliver.png';
+import Airbnb from '../../assets/deleteme/airbnb.png';
+import Agoda from '../../assets/deleteme/agoda.png';
+import Booking from '../../assets/deleteme/booking.png';
+
+import styles from './FrontPage.module.scss';
+
+// modal context
+import { ModalContext } from '../../contexts/ModalContext';
+
+export default function BodyModal(props) {
+  const { toggle } = useContext(ModalContext);
+
+  const [location, setLocation] = useState('');
+
+  useEffect(() => {
+    // init swiper
+    new Swiper('.swiper-container', {
+      // Optional parameters
+      direction: 'horizontal',
+      loop: false,
+      // mousewheel: {
+      //   invert: true,
+      // },
+
+      keyboard: {
+        enabled: true,
+        onlyInViewport: false,
+      },
+
+      // If we need pagination
+      // pagination: {
+      //   el: '.swiper-pagination',
+      // },
+
+      // Navigation arrows
+      // navigation: {
+      //   nextEl: '.swiper-button-next',
+      //   prevEl: '.swiper-button-prev',
+      // },
+
+      // And if we need scrollbar
+      // scrollbar: {
+      //   el: '.swiper-scrollbar',
+      // },
+      pagination: {
+        el: '.swiper-pagination',
+        type: 'bullets',
+      },
+    });
+  }, []);
+
+  // const { title } = props.data.advertisement;
+  // const { advertisementImages } = props.data.advertisement;
+  // const { hotline } = props.data.advertisement;
+  // const { directions } = props.data.advertisement;
+  // const { website } = props.data.advertisement;
+
+  const { brandName, website, facebook, instagram, twitter } = props.data;
+
+  const { branchList, slide, options } = props.data;
+
+  // drop down
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const toggleDropdown = () => setDropdownOpen((prevState) => !prevState);
+
+  return (
+    <>
+      <ModalHeader toggle={toggle} className={styles.modelHeader}>
+        {brandName}
+      </ModalHeader>
+      <ModalBody className={styles.modelBody}>
+        <div className={styles.modalIconWrapper}>
+          <div className={styles.modalSocialMedia}>
+            {facebook ? (
+              <a target="_blank" href={facebook}>
+                <img src={Facebook} alt="sm" />
+              </a>
+            ) : null}
+
+            {instagram ? (
+              <a target="_blank" href={instagram}>
+                <img src={Instagram} alt="sm" />
+              </a>
+            ) : null}
+
+            {twitter ? (
+              <a target="_blank" href={twitter}>
+                <img src={Twitter} alt="sm" />
+              </a>
+            ) : null}
+          </div>
+
+          <div className={styles.modalDelivery}>
+            {options.PickMe ? <img src={Pickme} alt="pickme" /> : null}
+            {options.Uber ? <img src={Uber} alt="uber" /> : null}
+            {options.WeDelivery ? <img src={WeDeliver} alt="uber" /> : null}
+            {options.Airbnb ? <img src={Airbnb} alt="airbnb" /> : null}
+            {options.Booking ? <img src={Booking} alt="booking" /> : null}
+            {options.Agoda ? <img src={Agoda} alt="agoda" /> : null}
+          </div>
+        </div>
+
+        {/* slider */}
+        <div className="swiper-container">
+          {/* <!-- Additional required wrapper --> */}
+          <div className="swiper-wrapper">
+            {/* <!-- Slides --> */}
+            {slide ? (
+              slide.map((item) => (
+                <div className="swiper-slide">
+                  <img
+                    src={item}
+                    className={styles.customAd}
+                    alt="usefulltext"
+                  />
+                </div>
+              ))
+            ) : (
+              <p>image</p>
+            )}
+
+            {/*
+            youtubee wrapper
+            <div className="swiper-slide video-wrapper">
+              <iframe
+                allowfullscreen="true"
+                className="modal-video"
+                width="560"
+                src="https://www.youtube.com/embed/dA0VGEbbw4g"
+                frameborder="0"
+                allow="accelerometer; encrypted-media; gyroscope;"
+              ></iframe>
+            </div> */}
+          </div>
+          {/* <!-- If we need pagination --> */}
+          <div className="swiper-pagination"></div>
+
+          {/* <!-- If we need navigation buttons --> */}
+          {/* <div className="swiper-button-prev"></div>
+          <div className="swiper-button-next"></div> */}
+
+          {/* <!-- If we need scrollbar --> */}
+          {/* <div className="swiper-scrollbar"></div> */}
+        </div>
+        {/* </p> */}
+      </ModalBody>
+      <ModalFooter>
+        <div className="modal-buttons">
+          {/* dropdown child */}
+          <Dropdown isOpen={dropdownOpen} toggle={toggleDropdown}>
+            <DropdownToggle color="secondary" caret>
+              Branch
+            </DropdownToggle>
+            <DropdownMenu>
+              {branchList.map((branch) => (
+                <DropdownItem onClick={() => setLocation(branch)}>
+                  {branch.district}
+                </DropdownItem>
+              ))}
+              {/* <DropdownItem>Colombo 1</DropdownItem>
+              <DropdownItem>Colombo 2</DropdownItem>
+              <DropdownItem>Colombo 3</DropdownItem>
+              <DropdownItem>Colombo 4</DropdownItem> */}
+            </DropdownMenu>
+          </Dropdown>
+          {/* call */}
+
+          {/* 
+        <Button
+          color="primary"
+          className={styles.buttonWrapper}
+          id="callToolTip"
+        >
+          <a className={styles.buttonLink} href={`tel:${hotline}`}>
+            <div className={styles.buttonIcon}>
+              <Call />
+            </div>
+            <div className={styles.buttonText}>Phone</div>
+            <UncontrolledTooltip placement="bottom" target="callToolTip">
+              {hotline}
+            </UncontrolledTooltip>
+          </a>
+        </Button>
+        <Button color="primary" className={styles.buttonWrapper}>
+          <a
+            className={styles.buttonLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            href={directions}
+          >
+            <div className={styles.buttonIcon}>
+              <Direction />
+            </div>
+            <div className={styles.buttonText}>Direction</div>
+          </a>
+        </Button>{' '}
+        <Button color="primary" className={styles.buttonWrapper}>
+          <a
+            className={styles.buttonLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            href={website}
+          >
+            <div className={styles.buttonIcon}>
+              <Globe />
+            </div>
+            <div className={styles.buttonText}>Website</div>
+          </a>
+        </Button>
+         */}
+
+          {/* <div className="modal-icons"> */}
+          <div className="modal-child" id="modal-number">
+            <a href={`tel:${location.number}`}>
+              <Call />
+            </a>
+            {location ? (
+              <UncontrolledTooltip placement="bottom" target="modal-number">
+                {location.number}
+              </UncontrolledTooltip>
+            ) : null}
+          </div>
+          <div className="modal-child" id="modal-district">
+            <a href={location.branchLocation} target="_blank">
+              <Direction />
+            </a>
+            {location ? (
+              <UncontrolledTooltip placement="bottom" target="modal-district">
+                {location.district}
+              </UncontrolledTooltip>
+            ) : null}
+          </div>
+          <div className="modal-child">
+            <a href={website ? website : null} target="_blank">
+              <Globe />
+            </a>
+          </div>
+          <div className="modal-child">
+            {/* <a href="https://www.google.com" target="_blank"> */}
+            <Share />
+            {/* </a> */}
+          </div>
+
+          {/* </div> */}
+
+          <div className="offer-icon">
+            <p>OFFER</p>
+          </div>
+        </div>
+
+        <div className={styles.modalFooterAd}></div>
+
+        {/* <div className="deliver-options">
+          <img src={Pickme} alt="pickme" />
+          <img src={Uber} alt="uber" />
+        </div> */}
+      </ModalFooter>
+    </>
+  );
+}

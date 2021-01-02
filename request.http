@@ -1,0 +1,43 @@
+POST http://localhost:3000/dev/users
+Content-Type: application/json
+
+{
+    "email": "test@test.com",
+    "password": "test"
+}
+
+###
+
+POST http://localhost:3000/dev/auth
+Content-Type: application/json
+
+{
+    "email": "test@test.com",
+    "password": "test"
+}
+
+###
+
+GET http://localhost:3000/dev/auth
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmZTRjYmU1MzdkZjUzMDVhNDA5MDg4MCIsImlhdCI6MTYwODgzMjM2OSwiZXhwIjoxNjA4ODMyNDg5fQ.G0OkWQ-ZP-4iogZTvJzEWadEjgJ05hTmyENJjzRpp1c
+
+###
+
+POST http://localhost:3000/dev/posts
+Content-Type: application/json
+
+###
+
+POST http://localhost:3000/dev/postsByUser
+Content-Type: application/json
+x-auth-token: 12345
+
+{
+    "message": "nothing"
+}
+
+
+###
+
+GET http://localhost:3000/dev/posts/5feb5d92911de9d1b4797f81
+Content-Type: application/json

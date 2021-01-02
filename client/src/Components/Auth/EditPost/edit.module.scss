@@ -1,0 +1,192 @@
+@import '../../Auth/CreatePost/Steps/formGroup.module.scss';
+@import '../../Auth/CreatePost/Steps/Button.module.scss';
+
+.wrapper {
+    width: 90%;
+    margin: auto;
+    margin-top: 3rem;
+
+    %shared-button {
+        color: #fff;
+        padding: 10px 50px;
+        border: none;
+        &:focus {
+            outline: none;
+        }
+
+        &:hover {
+            transition: 200ms;
+        }
+    }
+
+    %shared-card {
+        background: #e7e7e7;
+        border-top: 2px solid #bfbfbf;
+        border-left: 2px solid #bfbfbf;
+        border-right: 2px solid #bfbfbf;
+        border-radius: 8px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    %action-buttons {
+        border: none;
+        background: #1b1b1f;
+        color: #fff;
+        height: 40px;
+        width: 100px;
+        border-radius: 10px;
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    .navigation {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 1rem;
+
+        button {
+            @extend %shared-button;
+            background: #8b8b8b;
+            border-radius: 8px;
+
+            &:hover {
+                background: #424247;
+            }
+        }
+
+        .selected {
+            background: #212121;
+        }
+    }
+
+    .overview {
+        .groupWrapper {
+            margin-bottom: 3rem;
+        }
+
+        .footer {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin: 3rem 0;
+
+            button {
+                @extend %shared-button;
+                background: rgb(65, 65, 65);
+                border-radius: 20px;
+                background: #1b1b1f;
+                
+                &:hover {
+                    background: #424247;
+                }
+            }
+        }
+    }
+
+    .gallery {
+
+        button.cardButton {
+            border: none;
+            background: #1b1b1f;
+            color: #fff;
+            padding: 10px 50px;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+
+            &:focus {
+                outline: none;
+            }
+
+            &:hover {
+                background: #424247;
+                transition: 200ms;
+            }
+        }
+
+        .thumbnail {
+            // @extend %shared-card;
+            // align-items: flex-start;
+
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+
+            div {
+                width: 200px;
+                margin-top: 1rem;
+
+
+            input {
+
+                cursor: pointer;
+            }
+
+            }
+
+            img {
+                border-radius: 8px;
+                max-width: 200px;
+                max-height: 200px;
+            }
+    
+        }
+
+        .slides {
+            margin-top: 3rem;
+            .slideImages {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 10px;
+                margin-top: 20px;
+
+                .card {
+                    @extend %shared-card;
+
+                    img {
+                        margin:auto;
+                        max-width: 200px;
+                        max-height: 200px;
+                        padding: 10px;
+                    }
+                }
+
+                .uploadCard {
+                    @extend %shared-card;
+                    justify-content: space-between;
+                    gap: 16px;
+
+                    input {
+                        cursor: pointer;
+                    }
+
+                    img {
+                        width: 70px;
+                        margin: auto;
+                    }
+
+                }
+            }
+
+            .upload {
+                margin-top: 1rem;
+                
+                button {
+                    @extend %action-buttons;
+                }
+            }
+        }
+    }
+}
+
+.spinner {
+    position: absolute;
+    left: calc(50% - 80px);
+    top: calc(50% - 80px);
+}

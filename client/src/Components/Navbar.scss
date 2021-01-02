@@ -1,0 +1,269 @@
+.mobile-top-nav {
+  display: none;
+  // z-index: 2;
+}
+
+.mobile-bottom-nav {
+  display: none;
+}
+
+.mobile-search-bar {
+  background: #fff;
+  width: 100%;
+  top: 50px;
+
+  position: fixed;
+  
+  input {
+    padding: 0 10px;
+    height: 35px;
+    width: 100%;
+    background: #fff;
+    &:focus {
+      outline: none;
+    }
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1px solid #bfbfbf;
+  }
+}
+
+.mobile-suggestions-box {
+  box-shadow: 0px 3px 15px -3px rgba(138, 138, 138, 1);
+
+  .mobile-search-item {
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+    color: #bebebe;
+
+    p {
+      padding: 10px 0;
+      margin: 0;
+    }
+
+    &:hover {
+      background: #e0e0e0;
+      color: black;
+    }
+
+    &:not(:last-child) {
+      border-bottom: 1px solid rgb(219, 219, 219);
+    }
+  }
+}
+
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
+}
+
+%flex-align-center {
+  display: flex;
+  align-items: center;
+}
+
+.nav-wrapper {
+  display: grid;
+  position: fixed;
+  width: 100vw;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 0px 20px;
+  height: 60px;
+  border-bottom: 1px solid black;
+  background: #fff;
+
+  .nav-left {
+    @extend %flex-align-center;
+    gap: 2rem;
+
+    img {
+      cursor: pointer;
+      width: 100px;
+    }
+
+    svg {
+      cursor: pointer;
+      max-width: 20px;
+    }
+
+    .search-bar {
+
+      @extend %flex-align-center;
+
+      i {
+        cursor: pointer;
+      }
+
+      input {
+        border: none;
+        width: 8rem;
+
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+
+    .suggestions-box {
+      position: absolute;
+      top: 60px;
+      left: 200px;
+      background: #fff;
+      // border: 1px solid #dadada;
+      border-radius: 5px;
+      width: 150px;
+
+      .search-spinner.spinner {
+        margin-left: 35px;
+      }
+
+      .search-item {
+        // border: 1px solid #dadada;
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        justify-content: space-between;
+        cursor: pointer;
+        color: #bebebe;
+
+        &:hover {
+          background: #e0e0e0;
+          color: black;
+        }
+
+        &:not(:last-child) {
+          border-bottom: 1px solid rgb(219, 219, 219);
+        }
+
+        p {
+          padding: 0px;
+          margin: 0px;
+        }
+      }
+    }
+
+
+
+    .suggestions-hide {
+      display: none;
+    }
+  }
+
+
+
+  .nav-center {
+    @extend %flex-align-center;
+    justify-content: center;
+    gap: 2rem;
+
+    svg {
+      cursor: pointer;
+
+      &:hover {
+        fill: rgb(92, 92, 92);
+        transition: 300ms;
+      }
+    }
+
+    .nav-mango-card {
+      cursor: pointer;
+      padding: 0.1rem 0.5rem;
+      border: 3px solid rgb(255, 0, 0);
+
+      p {
+        color: rgb(255, 0, 0);
+        margin: 0;
+        font-weight: 500;
+      }
+
+      &:hover {
+        background: rgb(255, 0, 0);
+
+        p {
+          color: #fff;
+        }
+      }
+    }
+  }
+
+  .nav-right {
+    @extend %flex-align-center;
+    justify-content: flex-end;
+
+    svg {
+      cursor: pointer;
+    }
+
+    svg:first-child {
+      margin-right: 1rem;
+    }
+  }
+}
+
+@media (max-width: 900px) {
+
+  %flex-align-center-mobile {
+    display: flex;
+    align-items: center;
+  }
+
+  .nav-wrapper {
+    display: none;
+  }
+
+  .mobile-top-nav {
+    @extend %flex-align-center-mobile;
+    position: fixed;
+    width: 100vw;
+    background: #fff;
+    justify-content: space-around;
+    height: 50px;
+    border-bottom: 1.5px solid #bfbfbf;
+
+    svg {
+      width: 25px;
+      cursor: pointer;
+    }
+
+    img {
+      width: 100px;
+      cursor: pointer;
+    }
+
+  }
+
+  .mobile-bottom-nav {
+    @extend %flex-align-center-mobile;
+    justify-content: space-around;
+    position: fixed;
+    bottom: 0;
+    width: 100vw;
+    height: 50px;
+    background: #fff;
+    border-top: 1.5px solid #bfbfbf;
+
+    svg {
+      cursor: pointer;
+    }
+
+    .nav-mango-card {
+      cursor: pointer;
+      padding: 0.1rem 0.5rem;
+      border: 3px solid #000;
+      background: #000;
+
+      p {
+        color: #fff;
+        margin: 0;
+        font-weight: 500;
+      }
+    }
+  }
+}

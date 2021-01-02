@@ -1,0 +1,22 @@
+@import './formGroup.module.scss';
+@import './Button.module.scss';
+
+.wrapper {
+    width: 90%;
+    margin: auto;
+
+    h1 {
+        padding-top: 3rem;
+    }
+}
+
+@media(max-width: 900px) {
+
+    .wrapper {        
+        .hotelOptions {
+            .optionItems {
+                grid-template-columns: 1fr;
+            }
+        }
+    }
+}
