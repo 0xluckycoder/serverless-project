@@ -46,8 +46,8 @@ The authentication system is still in development. I've added a simple auth syst
 ### Users
 
 - createUser POST /dev/users (public)
-- login POST /dev/auth public)
-- getUser GET /dev/auth private)
+- login POST /dev/auth (public)
+- getUser GET /dev/auth (private)
 
 ### Posts
 
