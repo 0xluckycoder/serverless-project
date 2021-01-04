@@ -14,14 +14,14 @@ export default function Account() {
   const fetchPostsByUser = async () => {
     setLoading(true);
     try {
-      const allPosts = await getPostsByUser();
+      const allPosts = await getPostsByUser(state.user.user._id);
+      console.log(allPosts);
       setPosts(allPosts);
-      console.log('here is the data', allPosts);
+      setLoading(false);
     } catch(error) {
       console.log(error);
+      setLoading(false);
     }
-
-    setLoading(false);
   }
 
   useEffect(() => {
@@ -64,7 +64,7 @@ const AdItems = ({ posts, fetchPostsByUser }) => {
   }
 
   return (
-    posts ?
+    posts.length > 0 ?
     posts.map((item, index) => {
       return (
         <div key={index} className={style.body}>

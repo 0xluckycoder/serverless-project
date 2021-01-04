@@ -30,7 +30,7 @@ export function updatePost(id, data) {
     const body = JSON.stringify(data);
     return new Promise(async (resolve, reject) => {
         try {
-            const response = await fetch(`/dev/posts/${id}`, tokenConfig('PUT', false, body));
+            const response = await fetch(`/dev/posts/${id}`, tokenConfig('PUT', true, body));
             const data = await response.json();
             if (data.error) {
                 return reject({ error: data.error });
@@ -43,14 +43,16 @@ export function updatePost(id, data) {
     });
 }
 
-export function getPostsByUser() {
+export function getPostsByUser(userId) {
+    console.log(userId);
     return new Promise(async (resolve, reject) => {
         try {
-            const response = await fetch(`/dev/postsByUser`, tokenConfig('GET', true));
+            const response = await fetch(`/dev/users/${userId}/posts`, tokenConfig('GET', true));
             const data = await response.json();
             if (data.error) {
                 return reject({ error: data.error });
             } else {
+                console.log(data);
                 return resolve(data);
             }
         } catch(error) {
@@ -63,7 +65,7 @@ export function createPost(data) {
     return new Promise(async (resolve, reject) => {
         const body = JSON.stringify(data);
         try {
-            const response = await fetch('/dev/posts', tokenConfig('POST', false, body));
+            const response = await fetch('/dev/posts', tokenConfig('POST', true, body));
             const data = await response.json();
             if (data.error) {
                 return reject({ error: data.error });
@@ -119,6 +121,23 @@ export function registerRequest(values) {
         // Headers
         try {
             const response = await fetch('/dev/users', tokenConfig('POST', false, body));
+            const data = await response.json();
+            if (data.error) {
+                return reject({error: data.error});
+            } else {
+                return resolve(data);
+            }
+        } catch (error) {
+            return reject({ error });
+        }
+    });
+}
+
+export function getAllPosts() {
+    return new Promise(async (resolve, reject) => {
+        // Headers
+        try {
+            const response = await fetch('/dev/posts', tokenConfig('GET', false));
             const data = await response.json();
             if (data.error) {
                 return reject({error: data.error});

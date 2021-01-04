@@ -1,7 +1,9 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { Form, Formik, FieldArray, useField } from 'formik';
 import {Link} from 'react-router-dom';
 import * as Yup from 'yup';
+import { updatePost } from '../../../api/api';
 // import { updateBranch, deleteBranch, createBranch, updatePost } from '../../../graphql/mutations';
 // import { API, graphqlOperation } from 'aws-amplify';
 import swal from 'sweetalert';
@@ -19,7 +21,7 @@ const Overview = ({ initialData, currentPost }) => {
       // console.log(deletedBranch);
     }
 
-
+    let history = useHistory();
 
     return (
         <div>
@@ -68,99 +70,28 @@ const Overview = ({ initialData, currentPost }) => {
               // airbnbOption: Yup.string().max(100).url(),
               // trivagoOption: Yup.string().max(100).url(),
           })}
-          onSubmit={(values) => {
-
+          onSubmit={async (values) => {
             console.log(values);
-
-            // console.log('submitted values', values);
-
-            // const { 
-            //   category, 
-            //   brandName, 
-            //   number,
-            //   website, 
-            //   facebook, 
-            //   instagram, 
-            //   twitter,
-            // } = values;
-
-              // collect options if available
-              // let availableOptions = [];
-              // airbnbOption && availableOptions.push({ option: "airbnb", url: airbnbOption });
-              // bookingOption && availableOptions.push({ option: "booking", url: bookingOption });
-              // trivagoOption && availableOptions.push({ option: "trivago", url: trivagoOption });
-              // halalOption && availableOptions.push({ option: "halal", url: halalOption });
-
-            // // structure the posts properly
-            // const post = {
-            //   id: currentPost,
-            //   brand_name: brandName,
-            //   category: category,
-            //   number: number,
-            //   website: website,
-            //   facebook: facebook,
-            //   instagram: instagram,
-            //   twitter: twitter
-            // };
-
-            const handleUpdateBranch = async (update) => {
-              // try {
-              //   const updatedBranch = await API.graphql(graphqlOperation(updateBranch, { input: update }));
-              //   console.log('branch updated', updatedBranch);
-              // } catch (error) {
-              //   console.log('update branch error', error);
-              // }
+            try {
+              await updatePost(currentPost, values);
+              swal({
+                title: "Updated",
+                text: "Overview is updated",
+                buttons: false,
+                timer: 2500
+              });
+              history.push('/account');
+            } catch(error) {
+              console.log(error);
+              swal({
+                title: "Error",
+                text: "Error Occurred",
+                icon: "error",
+                buttons: false,
+                timer: 2500
+              });
+              history.push('/account');
             }
-
-            const handleCreateBranch = async (create) => {
-              // try {
-              //   const createdBranch = await API.graphql(graphqlOperation(createBranch, { input: create }));
-              //   console.log('branch created', createdBranch);
-              // } catch (error) {
-              //   console.log('create branch error', error);
-
-              // }
-            }
-
-            const handleUpdatePost = async () => {
-              // try {
-              //   const updatedPost = await API.graphql(graphqlOperation(updatePost, { input: post } ));
-              //   console.log('updated post', updatedPost);
-              //   swal({
-              //     title: "Updated",
-              //     text: "Overview is updated",
-              //     buttons: false,
-              //     timer: 2500
-              //   });
-              // } catch (error) {
-              //   console.log('error updating post', error);
-              // }
-            }
-
-            // updating branches 
-            // for (const item of values.branches) {
-            //   if (item.id) {
-            //     const update = {
-            //       id: item.id,
-            //       postID: currentPost,
-            //       location: item.branchLocation,
-            //       district: item.district
-            //     }
-            //     handleUpdateBranch(update);
-            //   } else {
-            //     const create = {
-            //       postID: currentPost,
-            //       location: item.branchLocation,
-            //       district: item.district
-            //     }
-            //     handleCreateBranch(create);
-            //   }
-            //   // add the id of the branch that i want to edit
-            // }
-
-            // updating post
-            // handleUpdatePost();
-            
           }}
         >
           {({ values, errors }) => (

@@ -4,7 +4,7 @@ module.exports = function checkAuthorization(headers) {
     return new Promise((resolve, reject) => {
         const accessToken = headers['x-auth-token'];
         if (!accessToken) {
-            reject({ error: 'token unavailable' })
+            reject({ error: 'token unavailable'});
         }
 
         try {

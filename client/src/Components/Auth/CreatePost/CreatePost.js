@@ -38,10 +38,7 @@ export default function CreatePost() {
 
       const { thumbnail, slide } = thirdValues;
 
-      const currentUser = state.user && state.user.user._id
-
       const values = {
-        owner: currentUser,
         analytics: 1,
         brandName,
         category,

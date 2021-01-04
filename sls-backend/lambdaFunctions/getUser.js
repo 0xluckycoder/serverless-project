@@ -13,6 +13,6 @@ module.exports = async function(event, context, callback) {
         callback(null, {statusCode: 200, body: JSON.stringify({ user: fetchedUser })});
       } catch(error) {
         console.log(error);
-        callback(null, {statusCode: 200, body: JSON.stringify(error)});
+        callback(null, {statusCode: 401, body: JSON.stringify(error)});
       }
 }

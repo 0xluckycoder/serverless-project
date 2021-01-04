@@ -34,44 +34,19 @@ const Gallery = ({ initialData, currentPost }) => {
     } = useForm(submit, validate);
 
     const handleUpdate = async (slidesArr, initialThumbnail) => {
-
       const updateGallery = {
         slide: slidesArr,
         thumbnail: initialThumbnail.url
       }
 
       await updatePost(currentPost, updateGallery);
-
-
-      // console.log(slidesArr, initialThumbnail);
-      
-      // const updatedPost = await API.graphql(graphqlOperation(updatePost, {
-      //   input: {
-      //     id: currentPost,
-      //     thumbnail: initialThumbnail.url,
-      //     slide: slidesArr
-      //   }
-      // }));
-
-      // swal({
-      //   title: "Updated",
-      //   text: "Gallery is updated",
-      //   buttons: false,
-      //   timer: 2500
-      // });
-
-      // console.log('updated post ✔', updatedPost);
     }
 
     function submit() {
       const slidesArr = slides.map(slide => slide.url);
-      console.log('🌴', slidesArr);
-      console.log('📷', initialThumbnail);
-
       handleUpdate(slidesArr, initialThumbnail);
     }
   
-    // const [initialImages, setInitialImages] = useState([]);
   
     const handleInitialState = (slide) => {
       if (slide) {
@@ -79,7 +54,6 @@ const Gallery = ({ initialData, currentPost }) => {
           return {url: item}
         });
   
-        // setInitialImages(images);
         setSlide(images);
         setThumbnail({url: thumbnail})
       }
@@ -132,7 +106,7 @@ const Gallery = ({ initialData, currentPost }) => {
                 <ReactSortable className={style.slideImages} list={slides} setList={setSlide} animation={200}>
                   {slides.map(({ url }, index) => url ? (
                       <div className={style.card}>
-                        {url && <img src={url} alt="image" />}
+                        {url && <img src={url} alt="uploads" />}
                         <button className={style.cardButton} onClick={() => handleRemoveClick(index, url)}>Remove</button>
                       </div>
                   )
@@ -149,7 +123,7 @@ const Gallery = ({ initialData, currentPost }) => {
                         </label>
                       </div>
 
-                      <img src={upload} alt="image" />
+                      <img src={upload} alt="uploads" />
                       
                       <button className={style.cardButton} onClick={() => handleRemoveClick(index, url)}>Remove</button>
                     </div>
@@ -158,7 +132,6 @@ const Gallery = ({ initialData, currentPost }) => {
                 </ReactSortable>
                 {slides.length < 5 
                 ?  <div className={style.upload}>
-                {console.log('kkkkkkk',slides)}
                 <button onClick={handleAddClick}>Add</button>
               </div> 
                 : null}

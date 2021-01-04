@@ -1,11 +1,11 @@
 'use strict';
-
-const connectToDatabase = require('../lib/db');
-const imageUploader = require('../lib/imageUploader');
 const Joi = require('joi');
 require('dotenv').config();
-
+const connectToDatabase = require('../lib/db');
+const checkAuthorization = require('../lib/checkAuthorization');
+const imageUploader = require('../lib/imageUploader');
 const Post = require('../models/Post');
+const User = require('../models/User');
 
 // @desc Create Post
 // @path POST /dev/posts
@@ -14,6 +14,14 @@ module.exports = async function(event, context, callback) {
     try {
         let body = JSON.parse(event.body);
         connectToDatabase();
+
+        try {
+            const { user } = await checkAuthorization(event.headers);
+            const fetchedUser = await User.findById(user.id).select('-password');    
+            body.owner = fetchedUser._id;
+        } catch(error) {
+            callback(null, {statusCode: 401, body: JSON.stringify({ error: error.error })});
+        }
 
         // upload media
         if (body.slide && body.thumbnail) {
@@ -59,14 +67,11 @@ module.exports = async function(event, context, callback) {
         // save in database
         const newPost = new Post(value);
         const createdPost = await newPost.save();
+        console.log(createdPost);
         callback(null, {statusCode: 200, body: JSON.stringify(createdPost)});
 
     } catch(error) {
-        // send the error and stop the process
-        callback(null, {statusCode: 401, body: JSON.stringify({
-            error: 'error occurred'
-        })});
- 
+        callback(null, { statusCode: 500, body: JSON.stringify({ error: 'server error' })});
         console.log(error);
     }
 }

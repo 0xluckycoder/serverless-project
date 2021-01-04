@@ -15,6 +15,12 @@ module.exports = async function(event, context, callback) {
         const id = event.pathParameters.id;
         connectToDatabase();
 
+        try {
+            await checkAuthorization(event.headers);
+        } catch(error) {
+            callback(null, {statusCode: 401, body: JSON.stringify({ error: error.error })});
+        }
+
         // upload media if available in body to update
         if (body.slide && body.thumbnail) {
             const { slide, thumbnail } = await imageUploader(body.slide, body.thumbnail);
@@ -29,6 +35,6 @@ module.exports = async function(event, context, callback) {
 
     } catch(error) {
         console.log(error);
-        callback(null, {statusCode: 401, body: JSON.stringify({error: error})});
+        callback(null, {statusCode: 500, body: JSON.stringify({error: 'server error'})});
     }
 }

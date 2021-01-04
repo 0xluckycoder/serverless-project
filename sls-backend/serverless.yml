@@ -78,22 +78,23 @@ functions:
       - http:
           path: auth
           method: GET
-          cors:
-            origin: '*'
-            headers:
-              - Content-Type
-              - x-auth-token
   createPost:
     handler: handler.createPost
     events:
       - http:
           path: posts
           method: POST
+  getPosts:
+    handler: handler.getPosts
+    events:
+      - http:
+          path: posts
+          method: GET
   getPostsByUser:
     handler: handler.getPostsByUser
     events:
       - http:
-          path: postsByUser
+          path: users/{user}/posts
           method: GET
   updatePost:
     handler: handler.updatePost
@@ -107,6 +108,17 @@ functions:
       - http:
           path: posts/{id}
           method: GET
+  # test:
+  #   handler: handler.test
+  #   events:
+  #     - http:
+  #         path: test
+  #         method: GET
+  # cors:
+  #   origin: '*'
+  #   headers:
+  #     - Content-Type
+  #     - x-auth-token
 
 useDotenv: true
 

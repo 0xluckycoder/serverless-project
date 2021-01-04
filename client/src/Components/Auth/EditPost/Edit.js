@@ -23,7 +23,6 @@ export default function Edit() {
     const { id } = useParams();
 
     useEffect(() => {
-      let mounted = true;
       const fetchData = async () => {
         const data = await getPostById(id);
         setInitialData(data);
@@ -31,16 +30,12 @@ export default function Edit() {
       }
 
       fetchData();
-      return () => {
-        mounted = false;
-      }
     }, []);
 
     return (
         state.isAuthenticated && state.user ?
         <>
-        {
-        loading ?
+        {loading ?
             <Spinner />
         :
             <div className={style.wrapper}>

@@ -15,7 +15,7 @@ module.exports = async function (event, context, callback) {
     
         if (!body.email || !body.password) {
           return callback(null, {
-            statusCode: 200,
+            statusCode: 400,
             body: JSON.stringify({ error: "please fill all fields" })
           });
         }
@@ -23,7 +23,7 @@ module.exports = async function (event, context, callback) {
         const user = await User.findOne({ email: body.email });
         if (user) {
           return callback(null, {
-            statusCode: 401,
+            statusCode: 400,
             body: JSON.stringify({ error: "user already exists" })
           });
         }

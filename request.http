@@ -28,16 +28,32 @@ Content-Type: application/json
 
 ###
 
-POST http://localhost:3000/dev/postsByUser
+GET http://localhost:3000/dev/postsByUser
 Content-Type: application/json
-x-auth-token: 12345
-
-{
-    "message": "nothing"
-}
-
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmZTRjYmU1MzdkZjUzMDVhNDA5MDg4MCIsImlhdCI6MTYwOTY5ODI4NSwiZXhwIjoxNjA5NzAxODg1fQ.k1IBFV697C7tQ6yZjl-j-4K172LcszRDX8T9bhBhXxw
 
 ###
 
 GET http://localhost:3000/dev/posts/5feb5d92911de9d1b4797f81
 Content-Type: application/json
+
+###
+
+POST http://localhost:3000/dev/posts
+Content-Type: application/json
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmZTRjYmU1MzdkZjUzMDVhNDA5MDg4MCIsImlhdCI6MTYwOTY5NjU2NywiZXhwIjoxNjA5NzAwMTY3fQ.SwqiTwE-Af5x8uoHBoYI5rCRG4P3kC0P2TBFsnz7Ib4
+
+{
+    "data": "hello"
+}
+
+### 
+
+# GET http://localhost:3000/dev/test?filter=123
+GET http://localhost:3000/dev/users/5fe4cbe537df5305a4090880/posts
+Content-Type: application/json
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmZTRjYmU1MzdkZjUzMDVhNDA5MDg4MCIsImlhdCI6MTYwOTcwOTMwOSwiZXhwIjoxNjA5NzEyOTA5fQ.YZ_36GMwDdlJS4-DaJBW_yPin7jpGuPuCaHM2u4RsRY
+
+###
+
+GET http://localhost:3000/dev/posts

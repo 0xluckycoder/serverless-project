@@ -9,19 +9,26 @@ import './Feed.scss';
 
 import { Link, Route, Switch, useHistory } from 'react-router-dom';
 
-import { AuthContext } from '../Context/AuthContext'; 
-
 import { FeedContext } from '../Context/FeedContext'; 
 
-// import { API, graphqlOperation } from 'aws-amplify';
-// import { getPost, listPosts } from '../graphql/queries';
-// import { updatePost } from '../graphql/mutations';
+import { getAllPosts } from '../api/api';
 
 export default function Feed() {
 
-//   const promise = API.graphql({query: listPosts, authMode: 'AWS_IAM'});
-
   const { feedData, setFeedData } = useContext(FeedContext);
+
+  const fetchData = async () => {
+    try {
+      const { posts } = await getAllPosts();
+      setFeedData(posts)
+    } catch(error) {
+      console.log('error listing posts', error);
+    }
+  }
+
+  useEffect(() => {
+    fetchData();
+  });
 
 //   useEffect(() => {
 //     const fetchData = async () => {
@@ -67,21 +74,14 @@ export default function Feed() {
   }
   */
 
-  let history = useHistory();
-
-
+  // fill 400 grid boxes with empty grey boxes
   let gridItems = [];
-
   const countingGrid = () => {
     if (feedData.items && feedData.items.length < 50) {
       let boxes = 400 - feedData.items.length;
-
-      console.log('boxes', boxes);
-
       for (let i = 0; i <= boxes; i++) {
         gridItems.push(i);
       }
-      
     } else {
         for (let i = 0; i <= 400; i++) {
             gridItems.push(i);
@@ -99,12 +99,14 @@ export default function Feed() {
          */}
           <div className="feed">
             <div className="image-list">
-            {feedData.items ? feedData.items.map((item, index) => (
-              <img key={index} 
-              /* onClick={() => handleAdClick(item.id)} */ 
-              src={`https://res.cloudinary.com/dw2wcjhod/image/fetch/w_100,h_100,q_auto/${item.thumbnail}`} alt="feedbox"/>
-            ))
-          : null}
+            {
+              feedData ? 
+                feedData.map((item, index) => (
+                  <img key={index} src={item.thumbnail} alt="feedbox"/>
+                ))
+              :
+                null
+            }
           {gridItems.map((box, index) => <div key={index} className="grid"></div>)}
             </div>
           </div>

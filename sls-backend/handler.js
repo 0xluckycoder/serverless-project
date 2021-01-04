@@ -20,6 +20,11 @@ module.exports.createPost = (event, context, callback) => {
   require('./lambdaFunctions/createPost')(event, context, callback);
 }
 
+module.exports.getPosts = (event, context, callback) => {
+  context.callbackWaitsForEmptyEventLoop = false;
+  require('./lambdaFunctions/getPosts')(event, context, callback);
+}
+
 module.exports.getPostsByUser = (event, context, callback) => {
   context.callbackWaitsForEmptyEventLoop = false;
   require('./lambdaFunctions/getPostsByUser')(event, context, callback);
