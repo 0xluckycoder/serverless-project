@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useMemo, useContext } from 'react';
 import SideMenu from './SideMenu';
 import Navbar from './Navbar';
-// import Modal from './Modal';
+import Modal from './Modal';
 import LoginModal from './LoginModal';
 // import LocationModal from './LocationModal';
 
@@ -11,7 +11,7 @@ import { Link, Route, Switch, useHistory } from 'react-router-dom';
 
 import { FeedContext } from '../Context/FeedContext'; 
 
-import { getAllPosts } from '../api/api';
+import { getAllPosts, getPostById, updateAnalytics } from '../api/api';
 
 export default function Feed() {
 
@@ -28,7 +28,7 @@ export default function Feed() {
 
   useEffect(() => {
     fetchData();
-  });
+  }, []);
 
 //   useEffect(() => {
 //     const fetchData = async () => {
@@ -74,11 +74,20 @@ export default function Feed() {
   }
   */
 
+  const handleAnalytics = async (id) => {
+    try {
+      const { post: { analytics } } = await getPostById(id);
+      await updateAnalytics(id, analytics + 1);
+    } catch(error) {
+      console.log(error);
+    }
+  }
+
   // fill 400 grid boxes with empty grey boxes
   let gridItems = [];
   const countingGrid = () => {
-    if (feedData.items && feedData.items.length < 50) {
-      let boxes = 400 - feedData.items.length;
+    if (feedData && feedData.length < 50) {
+      let boxes = 400 - feedData.length;
       for (let i = 0; i <= boxes; i++) {
         gridItems.push(i);
       }
@@ -90,6 +99,14 @@ export default function Feed() {
   }
 
   countingGrid();
+
+  let history = useHistory();
+
+  // open the ad modal
+  const handleClick = (id) => {
+    handleAnalytics(id);
+    history.push(`/ads/${id}`);
+  }
   
   return (
       <div>
@@ -102,7 +119,7 @@ export default function Feed() {
             {
               feedData ? 
                 feedData.map((item, index) => (
-                  <img key={index} src={item.thumbnail} alt="feedbox"/>
+                  <img key={index} onClick={() => handleClick(item._id)} src={item.thumbnail} alt="feedbox"/>
                 ))
               :
                 null
@@ -114,7 +131,7 @@ export default function Feed() {
         <Switch>
           {/* <Route path="/ads/location" component={LocationModal} /> */}
           <Route path="/ads/sign-in" component={LoginModal}/>
-          {/* <Route path="/ads/:id" component={Modal} /> */}
+          <Route path="/ads/:id" component={Modal} />
         </Switch> 
       </div>
   );

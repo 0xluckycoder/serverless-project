@@ -40,6 +40,16 @@ module.exports.getPostById = (event, context, callback) => {
   require('./lambdaFunctions/getPostById')(event, context, callback);
 }
 
+module.exports.searchPosts = (event, context, callback) => {
+  context.callbackWaitsForEmptyEventLoop = false;
+  require('./lambdaFunctions/searchPosts')(event, context, callback);
+}
+
+module.exports.updateAnalytics = (event, context, callback) => {
+  context.callbackWaitsForEmptyEventLoop = false;
+  require('./lambdaFunctions/updateAnalytics')(event, context, callback);
+}
+
 // module.exports.hello = async event => {
 //   return {
 //     statusCode: 200,

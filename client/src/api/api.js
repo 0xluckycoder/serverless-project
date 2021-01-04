@@ -149,3 +149,37 @@ export function getAllPosts() {
         }
     });
 }
+
+export function searchPosts(key, value) {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const response = await fetch(`/dev/search/posts?${key}=${value}`, tokenConfig('GET', false));
+            const data = await response.json();
+            if (data.error) {
+                return reject({error: data.error});
+            } else {
+                return resolve(data);
+            }
+        } catch(error) {
+            return reject({ error });
+        }
+    });
+}
+
+export function updateAnalytics(id, analytics) {
+    const body = JSON.stringify(analytics);
+    return new Promise(async (resolve, reject) => {
+        try {
+            const response = await fetch(`/dev/posts/analytics/${id}`, tokenConfig('POST', false, body));
+            const data = await response.json();
+            if (data.error) {
+                return reject({error: data.error});
+            } else {
+                return resolve(data);
+            }
+        } catch(error) {
+            return reject({ error });
+        }
+    });
+}
+

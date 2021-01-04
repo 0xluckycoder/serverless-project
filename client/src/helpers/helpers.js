@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 
 const textFilter = (email, num) => {
     if (email.length > num) {
-
       // removing 17 characters from end
       let newEmail = email.split("");
       let remove = newEmail.length - num;

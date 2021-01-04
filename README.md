@@ -26,7 +26,8 @@ The authentication system is still in development. I've added a simple auth syst
 - [x] - edit post functionality
 - [x] - validate every form data
 - [x] - front posts feed
-- [ ] - popup post modal
+- [x] - popup post modal
+- [x] - filter data with api
 - [ ] - logout
 
 ### Backend
@@ -36,7 +37,7 @@ The authentication system is still in development. I've added a simple auth syst
 - [x] - CRUD post routes
 - [x] - secure private routes
 - [x] - handle errors with status codes
-- [ ] - use rest end point to filter data
+- [x] - use rest end point to filter data
 - [ ] - secure with api key
 - [ ] - Refactor Authentication system
 
@@ -54,3 +55,5 @@ The authentication system is still in development. I've added a simple auth syst
 - postsByUser GET /dev/users/:id/posts (private)
 - updatePost PUT /dev/posts/:id (private)
 - getPostsById GET /dev/posts/:id (public)
+- searchPosts GET /dev/search/posts?key=value (public)
+- updateAnalytics POST /dev/posts/analytics (public)

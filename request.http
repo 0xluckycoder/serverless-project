@@ -56,4 +56,5 @@ x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmZTRjYmU1MzdkZjUzM
 
 ###
 
-GET http://localhost:3000/dev/posts
+GET http://localhost:3000/dev/search/posts?category=restaurants
+Content-Type: application/json

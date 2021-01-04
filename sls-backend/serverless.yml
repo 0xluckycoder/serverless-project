@@ -108,6 +108,18 @@ functions:
       - http:
           path: posts/{id}
           method: GET
+  searchPosts:
+    handler: handler.searchPosts
+    events:
+      - http:
+          path: search/posts
+          method: GET
+  updateAnalytics:
+    handler: handler.updateAnalytics
+    events:
+      - http:
+          path: posts/analytics/{id}
+          method: POST
   # test:
   #   handler: handler.test
   #   events:

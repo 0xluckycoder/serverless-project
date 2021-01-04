@@ -4,9 +4,7 @@ import { Link } from 'react-router-dom';
 import './SideMenu.scss';
 import { ReactComponent as Close } from '../assets/close-icon.svg';
 import { ACTIONS } from '../actions';
-
-// import { API } from 'aws-amplify';
-// import { postsByCategory } from '../graphql/queries';
+import { searchPosts } from '../api/api';
 
 // consume context
 import { PortalContext } from '../Context/PortalContext';
@@ -96,15 +94,15 @@ function MenuItem({ children, icon, categoryValue }) {
   const { setFeedData } = useContext(FeedContext);
 
   const handleCategoryClick = async (category) => {
-    console.log(category);
-    dispatch({ type: ACTIONS.CLOSE_SIDE_MENU })
-    // try {
-    //   const { data } = await API.graphql({ query: postsByCategory, variables: { category }, authMode: 'AWS_IAM' });
-    //   setFeedData(data.postsByCategory);
-    //   dispatch({ type: ACTIONS.CLOSE_SIDE_MENU })
-    // } catch (error) {
-    //   console.log('error on postByCategory', error);
-    // }
+    dispatch({ type: ACTIONS.CLOSE_SIDE_MENU });
+    
+    try {
+      const posts = await searchPosts('category', category);
+      console.log(posts);
+      setFeedData(posts);
+    } catch(error) {
+      console.log(error);
+    }
   }
 
   return (
