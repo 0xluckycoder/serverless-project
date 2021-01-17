@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 module.exports.createUser = (event, context, callback) => {
   context.callbackWaitsForEmptyEventLoop = false;
@@ -48,6 +48,11 @@ module.exports.searchPosts = (event, context, callback) => {
 module.exports.updateAnalytics = (event, context, callback) => {
   context.callbackWaitsForEmptyEventLoop = false;
   require('./lambdaFunctions/updateAnalytics')(event, context, callback);
+}
+
+module.exports.confirmEmail = (event, context, callback) => {
+  context.callbackWaitsForEmptyEventLoop = false;
+  require('./lambdaFunctions/confirmEmail')(event, context, callback);
 }
 
 // module.exports.hello = async event => {

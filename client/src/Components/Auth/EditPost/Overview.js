@@ -15,11 +15,11 @@ import style from './edit.module.scss';
 const Overview = ({ initialData, currentPost }) => {
 
     const { post } = initialData;
-    const removeBranch = async (item) => {
+    // const removeBranch = async (item) => {
       // console.log('removed', item.id);
       // const deletedBranch = await API.graphql(graphqlOperation(deleteBranch, {input : { id: item.id }}));
       // console.log(deletedBranch);
-    }
+    // }
 
     let history = useHistory();
 
@@ -180,10 +180,7 @@ const Overview = ({ initialData, currentPost }) => {
                                   <div className={style.addButton}>
                                     <button
                                       type="button"
-                                      onClick={() => {
-                                        removeBranch(friend)
-                                        remove(index)
-                                      }}
+                                      onClick={() => remove(index)}
                                     >
                                       <i className="fas fa-minus"></i>
                                     </button>

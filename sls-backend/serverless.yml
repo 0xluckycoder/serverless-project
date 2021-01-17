@@ -26,15 +26,17 @@ provider:
   memorySize: 128
   timeout: 10
 
-# you can overwrite defaults here
-#  stage: dev
-#  region: us-east-1
+  # you can overwrite defaults here
+  stage: dev
+  region: ap-south-1
 
-# you can add statements to the Lambda function's IAM Role here
-#  iamRoleStatements:
-#    - Effect: "Allow"
-#      Action:
-#        - "s3:ListBucket"
+  # you can add statements to the Lambda function's IAM Role here
+  iamRoleStatements:
+    - Effect: 'Allow'
+      Action:
+        - 'ses:*'
+        # - 'ses:SendRawEmail'
+      Resource: '*'
 #      Resource: { "Fn::Join" : ["", ["arn:aws:s3:::", { "Ref" : "ServerlessDeploymentBucket" } ] ]  }
 #    - Effect: "Allow"
 #      Action:
@@ -120,12 +122,29 @@ functions:
       - http:
           path: posts/analytics/{id}
           method: POST
+  confirmEmail:
+    handler: handler.confirmEmail
+    events:
+      - http:
+          path: posts/confirmation/{token}
+          method: GET
+  # sendEmails:
+  #   handler: handler.sendEmails
+  #   events:
+  #     - http:
+  #         path: email/send
+  #         method: POST
+  #         cors: true
+
   # test:
   #   handler: handler.test
   #   events:
   #     - http:
   #         path: test
   #         method: GET
+  #         cors:
+  #           origin: '*'
+
   # cors:
   #   origin: '*'
   #   headers:

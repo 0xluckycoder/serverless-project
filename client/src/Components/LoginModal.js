@@ -26,15 +26,12 @@ export default function LoginModal() {
         setLoading(true);
         try {
             const data = await signInRequest(values);
-            if (data) {
-                console.log(data);
-                dispatch({ type: ACTIONS.AUTH_SUCCESS, payload: data });
-                localStorage.setItem('accessToken', data.accessToken);
-                console.log('sign in success');
-                setLoading(false);
-                // redirect
-                history.push('/account');
-            }
+            console.log(data);
+            dispatch({ type: ACTIONS.AUTH_SUCCESS, payload: data });
+            localStorage.setItem('accessToken', data.accessToken);
+            setLoading(false);
+            // redirect
+            history.push('/account');
         } catch(error) {
             dispatch({ type: ACTIONS.AUTH_ERROR });
             setLoading(false);
@@ -53,13 +50,10 @@ export default function LoginModal() {
         setLoading(true);
         try {
             const data = await registerRequest(values);
-            if (data) {
-                console.log(data);
-                dispatch({ type: ACTIONS.AUTH_SUCCESS, payload: data });
-                localStorage.setItem('accessToken', data.accessToken);
-                console.log('sign up success');
-                setLoading(false);
-            }
+            dispatch({ type: ACTIONS.AUTH_SUCCESS, payload: data });
+            localStorage.setItem('accessToken', data.accessToken);
+            console.log('sign up success');
+            setLoading(false);
             // redirect
         } catch(error) {
             dispatch({ type: ACTIONS.AUTH_ERROR });

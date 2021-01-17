@@ -84,7 +84,8 @@ export default function Modal({ isOpen, onClose }) {
             <div className={style.modalBody}>
             {loading 
                 ? <Spinner />
-                : <><div className={style.heading}>
+                : <>
+                <div className={style.heading}>
                 <p>{data.brandName && data.brandName}</p>
                 <Link to="/ads"><Close onClick={onClose} /></Link>
             </div>
@@ -178,31 +179,3 @@ const Spinner = () => {
       </div>
     );
 }
-
-                 {/* {data && data.options && data.options.map(optionItem => {
-                        switch (optionItem.option) {
-                            case 'airbnb':
-                                return <a href={optionItem.url} target="_blank"><img src={airbnbLogo} alt="optionLogo" /></a>           
-                            case 'booking':
-                                return <a href={optionItem.url} target="_blank"><img src={bookingLogo} alt="optionLogo" /></a>
-                            case 'trivago':
-                                return <a href={optionItem.url} target="_blank"><img src={trivagoLogo} alt="optionLogo" /></a>
-                            case 'pickme' :
-                                return <img src={pickmeLogo} alt="optionLogo" />
-                            case 'uber' :
-                                return <img src={uberLogo} alt="optionLogo" />
-                            case 'deliver' :
-                                return <img src={deliverLogo} alt="optionLogo" />
-                            case 'halal' :
-                                return <img src={halalLogo} alt="optionLogo" />                            
-                            default:
-                                return null;
-                                break;
-                        }
-                    })} 
-                    {data.pickme && <img src={Pickme} alt="option" />}
-                    {data.uber && <img src={Uber} alt="option" />}
-                    {data.wedeliver && <img src={WeDeliver} alt="option" />}
-                    {data.airbnb && <img src={Airbnb} alt="option" />}                    
-                    {data.agoda && <img src={Agoda} alt="option" />}
-                    {data.booking && <img src={Booking} alt="option" />} */}

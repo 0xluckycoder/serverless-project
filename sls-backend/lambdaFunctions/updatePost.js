@@ -27,7 +27,7 @@ module.exports = async function(event, context, callback) {
             body.slide = slide;
             body.thumbnail = thumbnail;
         }
-
+        
         await Post.findByIdAndUpdate(id, body);
         callback(null, {statusCode: 200, body: JSON.stringify({
             message: 'success'

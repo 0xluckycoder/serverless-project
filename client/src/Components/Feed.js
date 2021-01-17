@@ -1,7 +1,8 @@
-import React, { useEffect, useState, useMemo, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import SideMenu from './SideMenu';
 import Navbar from './Navbar';
 import Modal from './Modal';
+import ConfirmModal from './ConfirmModal';
 import LoginModal from './LoginModal';
 // import LocationModal from './LocationModal';
 
@@ -29,50 +30,6 @@ export default function Feed() {
   useEffect(() => {
     fetchData();
   }, []);
-
-//   useEffect(() => {
-//     const fetchData = async () => {
-//       try {
-//         const { data } = await promise;
-//         setFeedData(data.listPosts);
-//       } catch (error) {
-//         console.log('error on listing posts', error);
-//       }
-//     }
-
-//     fetchData();
-
-//     return () => {
-//       API.cancel(promise, "my message for cancellation");
-//     }
-//   }, []);
-
-  /*
-  const updateAnalytics = async (currentId) => {
-    try {
-      // fetch post by id
-      const { data } = await API.graphql({ query: getPost, variables: { id: currentId }, authMode: 'AWS_IAM' });
-      // add click to analytics
-      const updateAnalytics = {
-        id: data.getPost.id,
-        analytics: parseInt(data.getPost.analytics) + 1
-      }
-      // update clicks
-      await API.graphql({ 
-        query: updatePost, 
-        variables: { input: updateAnalytics }, 
-        authMode: 'AWS_IAM' 
-      });
-    } catch(error) {
-      console.log(error);
-    }
-  }
-
-  const handleAdClick = (id) => {
-    updateAnalytics(id);
-    history.push(`/ads/${id}`);
-  }
-  */
 
   const handleAnalytics = async (id) => {
     try {
@@ -130,6 +87,7 @@ export default function Feed() {
 
         <Switch>
           {/* <Route path="/ads/location" component={LocationModal} /> */}
+          <Route path="/ads/confirm" component={ConfirmModal} />
           <Route path="/ads/sign-in" component={LoginModal}/>
           <Route path="/ads/:id" component={Modal} />
         </Switch> 

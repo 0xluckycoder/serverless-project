@@ -1,0 +1,50 @@
+.modalWrapper {
+    position: fixed;
+    background: rgba(0, 0, 0, 0.411);
+    height: 100%;
+    width: 100%;
+    top: 0;
+    
+    .modalBody {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        width: 500px;
+        height: 500px;
+        margin-left: -250px;
+        margin-top: -250px;
+        background: #fff;
+        border-radius: 8px;
+
+        .content {
+            padding: 0 1rem;
+            text-align: center;
+            position: absolute;
+            top: calc(50% - 128.8px/2);
+        }
+    }
+
+    .close {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+
+        a {
+            color: rgb(95, 95, 95);
+
+            &:hover {
+                color: #000;
+            }
+        }
+    }
+}
+
+// mobiles
+@media (max-width: 500px) {
+    .modalWrapper {
+        .modalBody {
+            width: 375px;
+            margin-left: -188px;
+        }
+    }
+}

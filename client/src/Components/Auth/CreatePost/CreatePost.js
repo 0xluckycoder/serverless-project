@@ -1,16 +1,15 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState } from 'react';
 import logo from '../../../assets/logo.png';
 import './CreatePost.scss';
 import { createPost } from '../../../api/api';
-import swal from 'sweetalert';
 
 import FirstStep from './Steps/FirstStep';
 import SecondStep from './Steps/SecondStep';
 import ThirdStep from './Steps/ThirdStep';
 import FourthStep from './Steps/FourthStep';
 
-import { AuthContext } from '../../../Context/AuthContext';
-import { useHistory } from 'react-router-dom';
+// import { AuthContext } from '../../../Context/AuthContext';
+// import { useHistory } from 'react-router-dom';
 
 export default function CreatePost() {
     const [step, setStep] = useState(1);
@@ -19,9 +18,7 @@ export default function CreatePost() {
     const [thirdValues, setThirdValues] = useState({});
     const [loading, setLoading] = useState(false);
 
-    const { state } = useContext(AuthContext);
-
-    let history = useHistory();
+    // const { state } = useContext(AuthContext);
 
     const submitData = async () => {
       const { category } = firstValues;
@@ -56,9 +53,8 @@ export default function CreatePost() {
       try {
         // console.log(values);
         setLoading(true);
-        const data = await createPost(values);
+        await createPost(values);
         setLoading(false);
-        console.log(data);
       } catch(error) {
         console.log(error);
         setLoading(false);

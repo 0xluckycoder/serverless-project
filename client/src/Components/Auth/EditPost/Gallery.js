@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useCallback, useMemo } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useMemo } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import { ReactSortable } from 'react-sortablejs';
 import useForm from '../../../CustomForm/useForm';
 import validate from '../../../CustomForm/validateEdit';
@@ -12,6 +12,8 @@ import { updatePost } from '../../../api/api';
 const Gallery = ({ initialData, currentPost }) => {
 
     const { post : { slide, thumbnail } } = initialData;
+
+    let history = useHistory();
 
     // avoid ref equality
     const MemSlide = useMemo(() => { 
@@ -38,8 +40,8 @@ const Gallery = ({ initialData, currentPost }) => {
         slide: slidesArr,
         thumbnail: initialThumbnail.url
       }
-
       await updatePost(currentPost, updateGallery);
+      history.push('/account');
     }
 
     function submit() {
@@ -73,7 +75,6 @@ const Gallery = ({ initialData, currentPost }) => {
         timer: 2500
       });
     }
-      console.log('error 🎃', errors)
     }, [errors])
 
     const Thumbnail = () => {

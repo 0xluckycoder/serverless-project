@@ -10,6 +10,10 @@ const requiredString = {
 const UserSchema = new Schema({
     email: requiredString,
     password: requiredString,
+    confirmed: {
+        type: Boolean,
+        default: false
+    },
     created_at: {
         type: String,
         default: Date.now

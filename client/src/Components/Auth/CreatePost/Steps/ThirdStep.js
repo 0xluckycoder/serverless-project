@@ -63,7 +63,7 @@ export default function ThirdStep({ setStep, setThirdValues }) {
               Click here to select files
             </label>
           </div>
-          {thumbnail.url && <img draggable="false" src={thumbnail.url} alt="thumbnail" />}
+          {thumbnail.url && <img draggable="false" src={thumbnail.url} alt="uploaded" />}
         </div>
       </div>
     );
