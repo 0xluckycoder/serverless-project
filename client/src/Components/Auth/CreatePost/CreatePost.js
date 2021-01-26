@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import logo from '../../../assets/logo.png';
 import './CreatePost.scss';
 import { createPost } from '../../../api/api';
@@ -8,7 +8,7 @@ import SecondStep from './Steps/SecondStep';
 import ThirdStep from './Steps/ThirdStep';
 import FourthStep from './Steps/FourthStep';
 
-// import { AuthContext } from '../../../Context/AuthContext';
+import { AuthContext } from '../../../Context/AuthContext';
 // import { useHistory } from 'react-router-dom';
 
 export default function CreatePost() {
@@ -18,7 +18,12 @@ export default function CreatePost() {
     const [thirdValues, setThirdValues] = useState({});
     const [loading, setLoading] = useState(false);
 
-    // const { state } = useContext(AuthContext);
+    const { state } = useContext(AuthContext);
+
+    // useEffect(() => {
+    //   if () {
+    //   }
+    // }, [])
 
     const submitData = async () => {
       const { category } = firstValues;
@@ -111,6 +116,7 @@ export default function CreatePost() {
     }
 
     return (
+      state.isAuthenticated && state.user && state.user.confirmed &&
       <div className="form-wrapper">
         <FormLeft>
           <img src={logo} alt="mangofriend" />
@@ -120,7 +126,7 @@ export default function CreatePost() {
         <FormRight>
           <FormBody step={step} />
         </FormRight>
-    </div>
+      </div>
     )
 }
 

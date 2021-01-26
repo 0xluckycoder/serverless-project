@@ -4,14 +4,14 @@ import Navbar from './Navbar';
 import Modal from './Modal';
 import ConfirmModal from './ConfirmModal';
 import LoginModal from './LoginModal';
-// import LocationModal from './LocationModal';
+import LocationModal from './LocationModal';
+import HotcardModal from './HotcardModal';
+import AboutModal from './AboutModal';
 
 import './Feed.scss';
 
-import { Link, Route, Switch, useHistory } from 'react-router-dom';
-
+import { Route, Switch, useHistory } from 'react-router-dom';
 import { FeedContext } from '../Context/FeedContext'; 
-
 import { getAllPosts, getPostById, updateAnalytics } from '../api/api';
 
 export default function Feed() {
@@ -28,6 +28,7 @@ export default function Feed() {
   }
 
   useEffect(() => {
+    console.log('feed loaded');
     fetchData();
   }, []);
 
@@ -89,6 +90,9 @@ export default function Feed() {
           {/* <Route path="/ads/location" component={LocationModal} /> */}
           <Route path="/ads/confirm" component={ConfirmModal} />
           <Route path="/ads/sign-in" component={LoginModal}/>
+          <Route path="/ads/location" component={LocationModal} />
+          <Route path="/ads/hotcard" component={HotcardModal} />
+          <Route path="/ads/about" component={AboutModal} />
           <Route path="/ads/:id" component={Modal} />
         </Switch> 
       </div>

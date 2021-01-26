@@ -30,7 +30,7 @@ const reducer = (state, action) => {
           }
       // eslint-disable-next-line no-fallthrough
       case ACTIONS.AUTH_ERROR:
-          localStorage.removeItem('token');
+      case ACTIONS.LOGOUT:
           return state = {
               ...state,
               token: null,

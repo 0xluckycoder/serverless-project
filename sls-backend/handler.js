@@ -55,6 +55,16 @@ module.exports.confirmEmail = (event, context, callback) => {
   require('./lambdaFunctions/confirmEmail')(event, context, callback);
 }
 
+module.exports.getPostsByLocation = (event, context, callback) => {
+  context.callbackWaitsForEmptyEventLoop = false;
+  require('./lambdaFunctions/getPostsByLocation')(event, context, callback);
+}
+
+module.exports.resendLink = (event, context, callback) => {
+  context.callbackWaitsForEmptyEventLoop = false;
+  require('./lambdaFunctions/resendLink')(event, context, callback);
+}
+
 // module.exports.hello = async event => {
 //   return {
 //     statusCode: 200,

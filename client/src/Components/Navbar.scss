@@ -173,18 +173,20 @@
     }
 
     .nav-mango-card {
+      font-size: 14px;
+      border-radius: 5px;
       cursor: pointer;
       padding: 0.1rem 0.5rem;
-      border: 3px solid rgb(255, 0, 0);
+      border: 2px solid #000;
 
       p {
-        color: rgb(255, 0, 0);
+        color: #000;
         margin: 0;
         font-weight: 500;
       }
 
       &:hover {
-        background: rgb(255, 0, 0);
+        background: #000;
 
         p {
           color: #fff;
@@ -254,15 +256,24 @@
     }
 
     .nav-mango-card {
+      font-size: 14px;
+      border-radius: 5px;
       cursor: pointer;
       padding: 0.1rem 0.5rem;
-      border: 3px solid #000;
-      background: #000;
+      border: 2px solid #000;
 
       p {
-        color: #fff;
+        color: #000;
         margin: 0;
         font-weight: 500;
+      }
+
+      &:hover {
+        background: #000;
+
+        p {
+          color: #fff;
+        }
       }
     }
   }

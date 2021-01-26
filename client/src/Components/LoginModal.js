@@ -26,12 +26,14 @@ export default function LoginModal() {
         setLoading(true);
         try {
             const data = await signInRequest(values);
-            console.log(data);
-            dispatch({ type: ACTIONS.AUTH_SUCCESS, payload: data });
-            localStorage.setItem('accessToken', data.accessToken);
-            setLoading(false);
-            // redirect
-            history.push('/account');
+            if (data.user.confirmed) {
+                localStorage.setItem('accessToken', data.accessToken);
+                dispatch({ type: ACTIONS.AUTH_SUCCESS, payload: data.user });
+                setLoading(false);
+                history.push('/account');
+            } else {
+                history.push('/ads/confirm');
+            }
         } catch(error) {
             dispatch({ type: ACTIONS.AUTH_ERROR });
             setLoading(false);
@@ -46,15 +48,14 @@ export default function LoginModal() {
     }
 
     const handleSignUp = async (values) => {
-        // console.log('sign up', values);
         setLoading(true);
         try {
-            const data = await registerRequest(values);
-            dispatch({ type: ACTIONS.AUTH_SUCCESS, payload: data });
-            localStorage.setItem('accessToken', data.accessToken);
+            await registerRequest(values);
+            // dispatch({ type: ACTIONS.AUTH_SUCCESS, payload: data });
+            // localStorage.setItem('accessToken', data.accessToken);
             console.log('sign up success');
             setLoading(false);
-            // redirect
+            history.push('/ads/confirm');
         } catch(error) {
             dispatch({ type: ACTIONS.AUTH_ERROR });
             setLoading(false);
@@ -70,9 +71,13 @@ export default function LoginModal() {
 
     useEffect(() => {
         // if user logged in redirecting to the account
-        state.isAuthenticated && state.user && history.push('/account');
+        if (state.isAuthenticated && state.user) {
+            // confirm
+            if (state.user.confirmed) {
+                history.push('/account');
+            }
+        }
 
-        // console.log(state);
         document.body.style.overflow = "hidden";
         return () => {
             document.body.style.overflow = "visible";
@@ -181,7 +186,7 @@ const SignUp = ({ setComponentState, loading, handleSignUp }) => {
                         <button type="submit">Submit</button>
                     </Form>
                 </Formik>
-                <button onClick={() => setComponentState('signin')}>Sign in</button>
+                {/* <button onClick={() => setComponentState('signin')}>Sign in</button> */}
                 <p>Create your account to post ads</p>
             </div>
         </>

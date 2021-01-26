@@ -1,20 +1,21 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, Redirect, useHistory } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthContext';
 import style from './account.module.scss';
 import { textFilter } from '../../helpers/helpers';
 
 import { getPostsByUser, updatePost } from '../../api/api';
+import { ACTIONS } from '../../actions';
 export default function Account() {
 
-  const { state } = useContext(AuthContext);
+  const { state, dispatch } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
   const [posts, setPosts] = useState([]);
 
   const fetchPostsByUser = async () => {
     setLoading(true);
     try {
-      const allPosts = await getPostsByUser(state.user.user._id);
+      const allPosts = await getPostsByUser(state.user._id);
       console.log(allPosts);
       setPosts(allPosts);
       setLoading(false);
@@ -28,19 +29,29 @@ export default function Account() {
     fetchPostsByUser();
   }, []);
 
+  let history = useHistory();
+
+  const handleLogout = (e) => {
+    e.preventDefault();
+    localStorage.removeItem('accessToken');
+    history.push('/ads');
+    dispatch({ type: ACTIONS.LOGOUT });
+  }
+
   return (
-    state.isAuthenticated && state.user ?
+    state.isAuthenticated && state.user && state.user.confirmed ?
     <>
       <div className={style.wrapper}>
       <div className={style.header}>
           <p>Profile</p>
           <div className={style.email}>
             <i className="fas fa-user"></i>
-            <p>{state.user && textFilter(state.user.user.email, 17)}</p>
+            <p>{state.user && textFilter(state.user.email, 17)}</p>
           </div>
           <Link to="/create" className={style.createButton}>Post New Ad</Link>
         </div>
         {loading ? <Spinner /> : <AdItems posts={posts} fetchPostsByUser={fetchPostsByUser} />}
+        <button onClick={(e) => handleLogout(e)} className={style.logout}>Logout</button>
       </div>
     </>
     :

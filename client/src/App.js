@@ -10,18 +10,25 @@ import { AuthContext } from './Context/AuthContext';
 import { ACTIONS } from './actions';
 import { verifyToken } from './api/api';
 
+import { useHistory } from 'react-router-dom';
+
 export default function App() {
 
   const { dispatch } = useContext(AuthContext);
 
+  let history = useHistory();
+
   const loadUser = async () => {
     try {
       dispatch({ type: ACTIONS.USER_LOADING });
-      const data = await verifyToken();
-      if (data) {
-        dispatch({ type: ACTIONS.USER_LOADED, payload: data });
+      const { user } = await verifyToken();
+
+      if (user.confirmed) {
+        dispatch({ type: ACTIONS.USER_LOADED, payload: user });
+      } else {
+        history.push('/ads/confirmed');
       }
-      console.log('user load success', data);
+      
     } catch(error) {
       if (error) dispatch({ type: ACTIONS.AUTH_ERROR });
       console.log('no auth user', error);

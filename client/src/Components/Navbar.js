@@ -60,7 +60,9 @@ export default function Navbar({ auth }) {
   useMobileOutsideHandler(mobileRef);
   // end
 
-
+  const filterOffer = () => {
+    console.log('offers are filtering');
+  }
 
   return (
     <>
@@ -74,11 +76,21 @@ export default function Navbar({ auth }) {
           </div>
         </div>
         <div className="nav-center">
+        <div onClick={(e) => filterOffer} className="nav-mango-card">
+            <p>OFFER</p>
+          </div>
+
           <Link to="/ads/location"><Location /></Link>
+
+          <Link to="/ads/hotcard">
+            <div className="nav-mango-card">
+              <p>HOTCARD</p>
+            </div>
+          </Link>
         </div>
 
         <div className="nav-right">
-          <Facebook onClick={() => console.log(suggestions.items)} />
+          <a href="https://www.facebook.com/hotbox.lk" target="_blank" rel="noreferrer"><Facebook /></a>
           <a target="_blank" href="https://www.instagram.com/hotbox.srilanka"><Instagram /></a>
         </div>
       </div>
@@ -87,8 +99,8 @@ export default function Navbar({ auth }) {
         <Toggle onClick={() => dispatch({ type: ACTIONS.SIDE_MENU })} />
         <SearchBar onClick={() => setToggle(!toggle)}  />
         <img src={logo} alt="logo" />
-        <Facebook />
-        <Instagram />
+        <a href="https://www.facebook.com/hotbox.lk" target="_blank" rel="noreferrer"><Facebook /></a>
+        <a href="https://www.instagram.com/hotbox.srilanka" target="_blank" rel="noreferrer"><Instagram /></a>
       </div>
 
       <div ref={mobileRef} className={`mobile-search-bar ${toggle ? `show` : `hide`} `}>
@@ -96,7 +108,15 @@ export default function Navbar({ auth }) {
       </div>
 
       <div className="mobile-bottom-nav">
+        <Link to="/ads/hotcard">
+          <div className="nav-mango-card">
+            <p>HOTCARD</p>
+          </div>
+        </Link>
         <Link to="/ads/location"><Location /></Link>
+        <div className="nav-mango-card">
+        <p>OFFER</p>
+        </div>
       </div>
     </>
   );

@@ -65,32 +65,13 @@ const Overview = ({ initialData, currentPost }) => {
               )
               .required('required :)')
               .max(5, 'Maximum 5 branches'),
-
-              // bookingOption: Yup.string().max(100).url(),
-              // airbnbOption: Yup.string().max(100).url(),
-              // trivagoOption: Yup.string().max(100).url(),
           })}
           onSubmit={async (values) => {
             console.log(values);
             try {
               await updatePost(currentPost, values);
-              swal({
-                title: "Updated",
-                text: "Overview is updated",
-                buttons: false,
-                timer: 2500
-              });
-              history.push('/account');
             } catch(error) {
               console.log(error);
-              swal({
-                title: "Error",
-                text: "Error Occurred",
-                icon: "error",
-                buttons: false,
-                timer: 2500
-              });
-              history.push('/account');
             }
           }}
         >

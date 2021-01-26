@@ -71,4 +71,9 @@ Content-Type: application/json
 
 ###
 
-# POST https://akuwa9xssl.execute-api.ap-south-1.amazonaws.com/dev/email/send
+GET http://localhost:3000/dev/location/mullativu/posts
+Content-Type: application/json
+
+###
+
+GET http://localhost:3000/dev/resend/obt30426@zwohos.com

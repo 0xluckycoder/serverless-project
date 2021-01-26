@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import './SideMenu.scss';
 import { ReactComponent as Close } from '../assets/close-icon.svg';
 import { ACTIONS } from '../actions';
-import { searchPosts } from '../api/api';
+import { searchPosts, getAllPosts } from '../api/api';
 
 // consume context
 import { PortalContext } from '../Context/PortalContext';
@@ -44,9 +44,10 @@ export default function SideMenu() {
       >
         Hotbox.lk
       </MenuHeading>
-      <MenuItem>About us</MenuItem>
+      <Link to="/ads/about"><MenuItem>About us</MenuItem></Link>
       <Link to="/ads/sign-in"><MenuItem>Sign in</MenuItem></Link>
       <MenuHeading>CATEGORIES</MenuHeading>
+      <MenuItem categoryValue="all">All</MenuItem>
       <MenuItem categoryValue="fashion" icon={<i className="fas fa-tshirt"></i>}>Fashion</MenuItem>
       <MenuItem categoryValue="restaurantsCafes" icon={<i className="fas fa-utensils"></i>}>Restaurants & Cafes</MenuItem>
       <MenuItem categoryValue="spasSaloons" icon={<i className="fas fa-cut"></i>}>Spas & Saloons</MenuItem>
@@ -97,9 +98,16 @@ function MenuItem({ children, icon, categoryValue }) {
     dispatch({ type: ACTIONS.CLOSE_SIDE_MENU });
     
     try {
-      const posts = await searchPosts('category', category);
-      console.log(posts);
-      setFeedData(posts);
+      if (category) {
+        if (category === 'all') {
+          const { posts } = await getAllPosts();
+          setFeedData(posts);
+        } else {
+          const posts = await searchPosts('category', category);
+          console.log(posts, category);
+          setFeedData(posts);
+        }
+      }
     } catch(error) {
       console.log(error);
     }

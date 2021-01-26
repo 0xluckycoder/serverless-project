@@ -1,6 +1,7 @@
 'use strict';
 const connectToDatabase = require('../lib/db');
 const imageUploader = require('../lib/imageUploader');
+const checkAuthorization = require('../lib/checkAuthorization');
 require('dotenv').config();
 
 const Post = require('../models/Post');

@@ -33,7 +33,7 @@ export default function Edit() {
     }, []);
 
     return (
-        state.isAuthenticated && state.user ?
+        state.isAuthenticated && state.user && state.user.confirmed &&
         <>
         {loading ?
             <Spinner />
@@ -44,8 +44,6 @@ export default function Edit() {
             </div>
         }
         </>
-        :
-        <Redirect to="/ads/sign-in" />
     );
 }
 

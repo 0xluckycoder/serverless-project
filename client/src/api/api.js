@@ -150,6 +150,18 @@ export function getAllPosts() {
     });
 }
 
+export function getPostsByLocation(location) {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const response = await fetch(`/dev/location/${location}/posts`, tokenConfig('GET', false));
+            const data = await response.json();
+            return resolve(data);
+        } catch (error) {
+            return reject({ error });
+        }
+    });
+}
+
 export function searchPosts(key, value) {
     return new Promise(async (resolve, reject) => {
         try {
@@ -174,6 +186,22 @@ export function updateAnalytics(id, analytics) {
             const data = await response.json();
             if (data.error) {
                 return reject({error: data.error});
+            } else {
+                return resolve(data);
+            }
+        } catch(error) {
+            return reject({ error });
+        }
+    });
+}
+
+export function resendLink(email) {
+    return new Promise(async(resolve, reject) => {
+        try {
+            const response = await fetch(`/dev/resend/${email}`);
+            const data = await response.json();
+            if (data.error) {
+                return reject({ error: data.error });
             } else {
                 return resolve(data);
             }

@@ -16,7 +16,14 @@ module.exports = async function(event, context, callback) {
             confirmed: true
         });
 
-        // redirect the user
+        const response = {
+            statusCode: 301,
+            headers: {
+                Location: 'http://localhost:8000/ads/sign-in'
+            }
+        };
+
+        callback(null, response);
 
     } catch(error) {
         console.log(error);
