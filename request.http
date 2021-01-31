@@ -77,3 +77,17 @@ Content-Type: application/json
 ###
 
 GET http://localhost:3000/dev/resend/obt30426@zwohos.com
+
+
+###
+
+POST http://localhost:3000/dev/sendPasswordReset
+Content-Type: application/json
+
+{
+    "email": "lakshanperera625@gmail.com"
+}
+
+###
+
+GET http://localhost:3000/dev/passwordReset/ddeyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwMTUzZDg4YTM4ZTkxMDI3ZWIwNWIwNiIsImVtYWlsIjoibGFrc2hhbnBlcmVyYTYyNUBnbWFpbC5jb20iLCJpYXQiOjE2MTIwODU3NDksImV4cCI6MTYxMjE3MjE0OX0.cj62QC-5fcdP6WkZuLIuAfHcWP5jeIsYkRIObBfRsZg/60153d88a38e91027eb05b06

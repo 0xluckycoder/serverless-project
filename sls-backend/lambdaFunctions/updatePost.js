@@ -1,4 +1,5 @@
-'use strict';
+'use strict'
+
 const connectToDatabase = require('../lib/db');
 const imageUploader = require('../lib/imageUploader');
 const checkAuthorization = require('../lib/checkAuthorization');

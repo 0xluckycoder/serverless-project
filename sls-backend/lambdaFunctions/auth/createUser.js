@@ -1,9 +1,9 @@
 'use strict'
 
-const connectToDatabase = require('../lib/db');
-const signToken = require('../lib/signToken');
-const sendEmailVerifyLink = require('../lib/sendEmailVerifyLink');
-const User = require('../models/User');
+const connectToDatabase = require('../../lib/db');
+const signToken = require('../../lib/signToken');
+const sendEmailVerifyLink = require('../../lib/sendEmailVerifyLink');
+const User = require('../../models/User');
 const bcrypt = require('bcryptjs');
 // const { SES } = require('aws-sdk');
 // const ses = new SES({ region: "ap-south-1" });

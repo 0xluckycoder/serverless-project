@@ -1,10 +1,10 @@
 import React, { useEffect, useContext } from 'react';
 import ReactDOM from 'react-dom';
-import { FeedContext } from '../Context/FeedContext'; 
+import { FeedContext } from '../../Context/FeedContext'; 
 import style from './LocationModal.module.scss';
 import { Link, useHistory } from 'react-router-dom';
-import { ReactComponent as Close } from '../assets/close-icon.svg';
-import { getPostsByLocation } from '../api/api';
+import { ReactComponent as Close } from '../../assets/close-icon.svg';
+import { getPostsByLocation } from '../../api/api';
 export default function LoginModal() {
     let history = useHistory();
 

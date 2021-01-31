@@ -2,18 +2,40 @@
 
 module.exports.createUser = (event, context, callback) => {
   context.callbackWaitsForEmptyEventLoop = false;
-  require('./lambdaFunctions/createUser')(event, context, callback);
+  require('./lambdaFunctions/auth/createUser')(event, context, callback);
 }
 
 module.exports.login = (event, context, callback) => {
   context.callbackWaitsForEmptyEventLoop = false;
-  require('./lambdaFunctions/login')(event, context, callback);
+  require('./lambdaFunctions/auth/login')(event, context, callback);
+}
+
+module.exports.confirmEmail = (event, context, callback) => {
+  context.callbackWaitsForEmptyEventLoop = false;
+  require('./lambdaFunctions/auth/confirmEmail')(event, context, callback);
+}
+
+module.exports.resendLink = (event, context, callback) => {
+  context.callbackWaitsForEmptyEventLoop = false;
+  require('./lambdaFunctions/auth/resendLink')(event, context, callback);
 }
 
 module.exports.getUser = (event, context, callback) => {
   context.callbackWaitsForEmptyEventLoop = false;
-  require('./lambdaFunctions/getUser')(event, context, callback);
+  require('./lambdaFunctions/auth/getUser')(event, context, callback);
 }
+
+module.exports.sendPasswordReset = (event, context, callback) => {
+  context.callbackWaitsForEmptyEventLoop = false;
+  require('./lambdaFunctions/auth/sendPasswordReset')(event, context, callback);
+}
+
+module.exports.verifyPasswordReset = (event, context, callback) => {
+  context.callbackWaitsForEmptyEventLoop = false;
+  require('./lambdaFunctions/auth/verifyPasswordReset')(event, context, callback);
+}
+
+// post methods
 
 module.exports.createPost = (event, context, callback) => {
   context.callbackWaitsForEmptyEventLoop = false;
@@ -50,19 +72,9 @@ module.exports.updateAnalytics = (event, context, callback) => {
   require('./lambdaFunctions/updateAnalytics')(event, context, callback);
 }
 
-module.exports.confirmEmail = (event, context, callback) => {
-  context.callbackWaitsForEmptyEventLoop = false;
-  require('./lambdaFunctions/confirmEmail')(event, context, callback);
-}
-
 module.exports.getPostsByLocation = (event, context, callback) => {
   context.callbackWaitsForEmptyEventLoop = false;
   require('./lambdaFunctions/getPostsByLocation')(event, context, callback);
-}
-
-module.exports.resendLink = (event, context, callback) => {
-  context.callbackWaitsForEmptyEventLoop = false;
-  require('./lambdaFunctions/resendLink')(event, context, callback);
 }
 
 // module.exports.hello = async event => {

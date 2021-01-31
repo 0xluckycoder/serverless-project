@@ -1,16 +1,19 @@
 'use strict'
-const connectToDatabase = require('../lib/db');
-require('dotenv').config();
-const jwt = require('jsonwebtoken');
-const User = require('../models/User');
 
-// emailSecret
+const connectToDatabase = require('../../lib/db');
+require('dotenv').config();
+const { verify } = require('jsonwebtoken');
+const User = require('../../models/User');
+
+// @desc Confirm Email
+// @path GET /dev/posts/confirmation/{token}
+// @authorization Public
 module.exports = async function(event, context, callback) {
     try {
         const { token } = event.pathParameters;
         connectToDatabase();
 
-        const decoded = jwt.verify(token, 'emailSecret');
+        const decoded = verify(token, 'emailSecret');
 
         await User.findByIdAndUpdate(decoded.userId, {
             confirmed: true

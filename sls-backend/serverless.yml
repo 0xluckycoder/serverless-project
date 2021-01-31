@@ -140,6 +140,18 @@ functions:
       - http:
           path: resend/{email}
           method: GET
+  sendPasswordReset:
+    handler: handler.sendPasswordReset
+    events:
+      - http:
+          path: sendPasswordReset
+          method: POST
+  verifyPasswordReset:
+    handler: handler.verifyPasswordReset
+    events:
+      - http:
+          path: passwordReset/{token}/{id}
+          method: GET
   # test:
   #   handler: handler.test
   #   events:

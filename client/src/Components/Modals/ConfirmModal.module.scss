@@ -1,3 +1,5 @@
+@import '../Auth/vars.scss';
+
 .modalWrapper {
     position: fixed;
     background: rgba(0, 0, 0, 0.411);
@@ -17,8 +19,28 @@
         border-radius: 8px;
 
         .content {
-            padding: 1rem 1rem 0 1rem;
+            padding: 0 1rem;
             text-align: center;
+            position: absolute;
+            top: calc(50% - 228px/2);
+
+            button {
+                margin-top: 1rem;
+                border: none;
+                background: $primary-color;
+                color: #fff;
+                padding: 5px 20px;
+                border-radius: 8px;
+        
+                &:focus {
+                    outline: none;
+                }
+        
+                &:hover {
+                    background: $hover-color;
+                    transition: 200ms;
+                }
+            }
         }
     }
 

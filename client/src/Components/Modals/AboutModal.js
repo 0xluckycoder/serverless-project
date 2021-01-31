@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import style from './AboutModal.module.scss';
 import { Link, useHistory } from 'react-router-dom';
-import { ReactComponent as Close } from '../assets/close-icon.svg';
+import { ReactComponent as Close } from '../../assets/close-icon.svg';
 export default function LoginModal() {
     let history = useHistory();
 

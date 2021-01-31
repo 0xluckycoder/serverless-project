@@ -1,4 +1,5 @@
-'use strict';
+'use strict'
+
 const Joi = require('joi');
 require('dotenv').config();
 const connectToDatabase = require('../lib/db');

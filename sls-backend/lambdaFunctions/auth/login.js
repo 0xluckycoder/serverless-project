@@ -1,8 +1,8 @@
-'use strict';
+'use strict'
 
-const connectToDatabase = require('../lib/db');
-const signToken = require('../lib/signToken');
-const User = require('../models/User');
+const connectToDatabase = require('../../lib/db');
+const signToken = require('../../lib/signToken');
+const User = require('../../models/User');
 const bcrypt = require('bcryptjs');
 
 // @desc User Login

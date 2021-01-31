@@ -7,12 +7,12 @@ import { Formik, useField, Form } from 'formik';
 import * as Yup from 'yup';
 import swal from 'sweetalert';
 
-import { AuthContext } from '../Context/AuthContext';
+import { AuthContext } from '../../Context/AuthContext';
 
-import logo from '../assets/logo.png';
-import { ReactComponent as Close } from '../assets/close-icon.svg';
-import { ACTIONS } from '../actions';
-import { registerRequest, signInRequest } from '../api/api';
+import logo from '../../assets/logo.png';
+import { ReactComponent as Close } from '../../assets/close-icon.svg';
+import { ACTIONS } from '../../actions';
+import { registerRequest, signInRequest } from '../../api/api';
 
 export default function LoginModal() {
 
@@ -142,10 +142,11 @@ const SignIn = ({ setComponentState, handleLogin, loading }) => {
                     <Form>
                         <TextField id="email" name="email" type="email" label="Email" placeholder="example@email.com" />
                         <TextField id="password" name="password" type="password" label="Password" placeholder="********" />
-                        <button type="submit">Submit</button>
+                        <button type="submit">Login</button>
                     </Form>
                 </Formik>
                 <button onClick={() => setComponentState('signup')}>Create Account</button>
+                <Link to="/ads/forgotPassword">Forgot Password ?</Link>
                 <p>Create your account to post ads</p>
             </div>
         </>
@@ -186,7 +187,7 @@ const SignUp = ({ setComponentState, loading, handleSignUp }) => {
                         <button type="submit">Submit</button>
                     </Form>
                 </Formik>
-                {/* <button onClick={() => setComponentState('signin')}>Sign in</button> */}
+                <Link to="/passwordReset">Forgot Password ?</Link>
                 <p>Create your account to post ads</p>
             </div>
         </>
@@ -220,5 +221,5 @@ const Spinner = () => {
         <div></div>
       </div>
     );
-  }
+}
 

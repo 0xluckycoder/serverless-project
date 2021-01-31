@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 const connectToDatabase = require('../lib/db');
 const Post = require('../models/Post');

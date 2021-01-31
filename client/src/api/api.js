@@ -10,6 +10,24 @@ function tokenConfig(method, token, body) {
     return config;
 }
 
+// verify token
+export function sendResetPasswordLink(data) {
+    const body = JSON.stringify(data);
+    return new Promise(async (resolve, reject) => {
+        try {
+            const response = await fetch(`/dev/sendPasswordReset`, tokenConfig('POST', false, body));
+            const data = await response.json();
+            if (data.error) {
+                return reject({ error: data.error });
+            } else {
+                return resolve(data);
+            }
+        } catch(error) {
+            return reject({ error });
+        }
+    });
+}
+
 export function getPostById(id) {
     return new Promise(async (resolve, reject) => {
         try {
@@ -211,3 +229,5 @@ export function resendLink(email) {
     });
 }
 
+
+// POST http://localhost:3000/dev/sendPasswordReset

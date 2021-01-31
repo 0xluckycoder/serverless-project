@@ -2,10 +2,10 @@ import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import style from './ConfirmModal.module.scss';
 import { Link, useHistory } from 'react-router-dom';
-import { ReactComponent as Close } from '../assets/close-icon.svg';
+import { ReactComponent as Close } from '../../assets/close-icon.svg';
 import { Formik, useField, Form } from 'formik';
 import * as Yup from 'yup';
-import { resendLink } from '../api/api';
+import { resendLink } from '../../api/api';
 import swal from 'sweetalert';
 
 export default function LoginModal() {

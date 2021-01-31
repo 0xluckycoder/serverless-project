@@ -1,8 +1,8 @@
 'use strict'
 
-const connectToDatabase = require('../lib/db');
-const sendEmailVerifyLink = require('../lib/sendEmailVerifyLink');
-const User = require('../models/User');
+const connectToDatabase = require('../../lib/db');
+const sendEmailVerifyLink = require('../../lib/sendEmailVerifyLink');
+const User = require('../../models/User');
 
 // @desc Create User
 // @path POST /dev/resend/{email}

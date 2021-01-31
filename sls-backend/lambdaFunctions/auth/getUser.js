@@ -1,8 +1,8 @@
 'use strict'
 
-const connectToDatabase = require('../lib/db');
-const User = require('../models/User');
-const checkAuthorization = require('../lib/checkAuthorization');
+const connectToDatabase = require('../../lib/db');
+const User = require('../../models/User');
+const checkAuthorization = require('../../lib/checkAuthorization');
 
 // @desc Get Single User
 // @path GET /dev/auth
