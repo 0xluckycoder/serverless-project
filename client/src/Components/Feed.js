@@ -2,12 +2,14 @@ import React, { useEffect, useContext } from 'react';
 import SideMenu from './SideMenu';
 import Navbar from './Navbar';
 import Modal from './Modal';
+
 import ConfirmModal from './Modals/ConfirmModal';
 import LoginModal from './Modals/LoginModal';
 import LocationModal from './Modals/LocationModal';
 import HotcardModal from './Modals/HotcardModal';
 import AboutModal from './Modals/AboutModal';
 import ForgotPassword from './Modals/ForgotPassword';
+import ChangePassword from './Modals/ChangePassword';
 
 import './Feed.scss';
 
@@ -89,6 +91,7 @@ export default function Feed() {
 
         <Switch>
           {/* <Route path="/ads/location" component={LocationModal} /> */}
+          <Route path="/ads/changePassword/:token/:id" component={ChangePassword} />
           <Route path="/ads/forgotPassword" component={ForgotPassword} />
           <Route path="/ads/confirm" component={ConfirmModal} />
           <Route path="/ads/sign-in" component={LoginModal}/>

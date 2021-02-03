@@ -187,7 +187,7 @@ const SignUp = ({ setComponentState, loading, handleSignUp }) => {
                         <button type="submit">Submit</button>
                     </Form>
                 </Formik>
-                <Link to="/passwordReset">Forgot Password ?</Link>
+                <Link to="/ads/forgotPassword">Forgot Password ?</Link>
                 <p>Create your account to post ads</p>
             </div>
         </>

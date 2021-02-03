@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import style from './ForgotPassword.module.scss';
-import { Link, useHistory } from 'react-router-dom';
+import style from './ChangePassword.module.scss';
+import { Link, useHistory, useParams } from 'react-router-dom';
 import { ReactComponent as Close } from '../../assets/close-icon.svg';
-import { sendResetPasswordLink } from '../../api/api';
+import { resetPassword } from '../../api/api';
 
 import { Formik, useField, Form } from 'formik';
 import * as Yup from 'yup';
@@ -13,19 +13,28 @@ export default function ForgotPasswordModal() {
 
     let history = useHistory();
 
-    const sendEmail = async (email) => {
+    const { token, id } = useParams();
+
+    const changePassword = async ({ password }) => {
         try {
-            await sendResetPasswordLink(email);
+            await resetPassword({ id, token, password });
+            // show success alert
             swal({
-                title: "Email Sent",
-                text: "please check your inbox",
+                title: "Password Changed",
+                text: "login with your new password",
                 buttons: false,
                 timer: 2000
             });
-            history.push('/ads');
-        } catch (error) {
-            console.log(error);
-            history.push('/ads');
+            history.push('/ads/sign-in');
+        } catch(error) {
+            if (error.error) {
+                swal({
+                    title: `${error.error}`,
+                    text: "please try again",
+                    buttons: false,
+                    timer: 2000
+                });
+            }
         }
     }
 
@@ -42,22 +51,22 @@ export default function ForgotPasswordModal() {
                     <Link to="/ads"><Close /></Link>
                 </div>
                 <div className={style.content}>
-                    <h2>Reset Password</h2>
-                    <p>We will send a password reset link to your email</p>
+                    <h2>Change Password</h2>
+                    <p>Enter Your New Password</p>
                     <Formik
                     initialValues={{
-                        email: "",
+                        password: "",
                     }}
                     validationSchema={Yup.object().shape({
-                        email: Yup.string().email().required()
+                        password: Yup.string().min(8).max(50).required()
                     })}
-                    onSubmit={(values) => {
-                        sendEmail(values)
+                    onSubmit={(password) => {
+                        changePassword(password);
                     }}
                 >
                     <Form>
-                        <TextField id="email" name="email" type="email" label="Email" placeholder="example@email.com" />
-                        <button type="submit">Send Email</button>
+                        <TextField id="password" name="password" type="password" label="Password" placeholder="*********" />
+                        <button type="submit">Change Password</button>
                     </Form>
                 </Formik>
                 </div>
