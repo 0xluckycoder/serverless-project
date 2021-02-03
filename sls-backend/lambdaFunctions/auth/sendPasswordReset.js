@@ -68,7 +68,7 @@ module.exports = async function (event, context, callback) {
          * step 2
          * decode and verify the token
          * redirect user to the password reset form (front end task)
-         * front end form will hold the token
+         * front end form will hold the token from url params
          * again decode the token reset the password 
          *
          * Test

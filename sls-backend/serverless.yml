@@ -150,8 +150,14 @@ functions:
     handler: handler.verifyPasswordReset
     events:
       - http:
-          path: passwordReset/{token}/{id}
-          method: GET
+          path: verifyPasswordReset
+          method: POST
+  # verifyPasswordReset:
+  #   handler: handler.verifyPasswordReset
+  #   events:
+  #     - http:
+  #         path: passwordReset/{token}/{id}
+  #         method: GET
   # test:
   #   handler: handler.test
   #   events:

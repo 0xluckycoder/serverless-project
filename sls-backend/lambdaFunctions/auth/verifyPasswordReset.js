@@ -3,34 +3,45 @@
 const connectToDatabase = require('../../lib/db');
 const User = require('../../models/User');
 const { verify } = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
 
 module.exports = async function(event, context, callback) {
     try {
+        let body = JSON.parse(event.body);
         connectToDatabase();
-        const { token, id } = event.pathParameters;
 
-        const user = await User.findById(id);
-        if (!user) callback(null, { statusCode: 200, body: JSON.stringify({ error: "user not found" })});
+        console.log(body);
+        
+        /**
+         * verify the token
+         * fetch the user password,created_at
+         * update the password
+         * */
+
+        const token = body.token;
+        
+        const user = await User.findById(body.id);
+        if (!user) return callback(null, { statusCode: 200, body: JSON.stringify({ error: "error occurred" })});
+        
         const secret = `${user.password}-${user.created_at}`;
-
         try {
-            const decoded = verify(token, secret);
-
-            /** 
-             * Save Data in the Frontend
-             * i can set up a HttpOnly cookie with available token
-             * https://aws.amazon.com/blogs/compute/simply-serverless-using-aws-lambda-to-expose-custom-cookies-with-api-gateway/
-             * */ 
-            // return callback(null, { 
-            //     statusCode: 301, 
-            //     headers: {
-            //         Location: 'http://localhost:8000/ads'
-            //     }, 
-            //     body: JSON.stringify(decoded)
-            // });
+            verify(token, secret);
         } catch(error) {
-            console.log(error);
-            return callback(null, {statusCode: 401, body: JSON.stringify({ error: "link has expired" })});
+            return callback(null, { statusCode: 200, body: JSON.stringify({ error: "Link Expired" })});
+        }
+
+        // change the password
+        try {
+            // hash the password
+
+            const salt = bcrypt.genSaltSync(10);
+            const newPassword = bcrypt.hashSync(body.password, salt);
+
+            await User.findByIdAndUpdate(user.id, {password: newPassword});
+            console.log(user.id, user.password, 'done');
+            return callback(null, { statusCode: 200, body: JSON.stringify({ message: "done" })});
+        } catch(error) {
+            return callback(null, { statusCode: 200, body: JSON.stringify({ error: "error occurred 3" })});
         }
 
     } catch(error) {
