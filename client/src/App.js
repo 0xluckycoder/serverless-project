@@ -37,7 +37,7 @@ export default function App() {
 
   useEffect(() => {
     loadUser();
-  }, []);
+  }, []); 
 
   // most specific routes first then least specific routes
 

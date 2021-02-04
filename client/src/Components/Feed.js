@@ -68,19 +68,26 @@ export default function Feed() {
     handleAnalytics(id);
     history.push(`/ads/${id}`);
   }
+
+  const makeImagesLowRes = (item, index) => {
+    
+    const urlArray = item.thumbnail.split('/');
+    urlArray[6] = "w_400,h_400";
+    const constructedUrl = urlArray.join('/');
+
+    return <img key={index} onClick={() => handleClick(item._id)} src={constructedUrl} alt="feedbox"/>
+  }
   
   return (
       <div>
           <Navbar />
           <SideMenu />
-        {/* 
-         */}
           <div className="feed">
             <div className="image-list">
             {
               feedData ? 
                 feedData.map((item, index) => (
-                  <img key={index} onClick={() => handleClick(item._id)} src={item.thumbnail} alt="feedbox"/>
+                  makeImagesLowRes(item, index)
                 ))
               :
                 null
@@ -90,7 +97,6 @@ export default function Feed() {
           </div>
 
         <Switch>
-          {/* <Route path="/ads/location" component={LocationModal} /> */}
           <Route path="/ads/changePassword/:token/:id" component={ChangePassword} />
           <Route path="/ads/forgotPassword" component={ForgotPassword} />
           <Route path="/ads/confirm" component={ConfirmModal} />
